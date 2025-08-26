@@ -1,0 +1,49 @@
+[
+  {
+    "id": "a1",
+    "slug": "jordan-wells",
+    "name": "Jordan Wells",
+    "title": "Principal Broker",
+    "photo": "/window.svg",
+    "phone": "+1 (404) 555-0110",
+    "email": "jordan@crosscreekrealty.com",
+    "languages": ["English"],
+    "specialties": ["Luxury", "Relocation"],
+    "office": "Atlanta",
+    "bio": "Seasoned broker with a decade of experience across metro Atlanta luxury and relocation.",
+    "social": {"linkedin": "https://linkedin.com"},
+    "serviceAreas": ["buckhead", "midtown", "alpharetta"]
+  },
+  {
+    "id": "a2",
+    "slug": "maria-chen",
+    "name": "Maria Chen",
+    "title": "Senior Advisor",
+    "photo": "/globe.svg",
+    "phone": "+1 (678) 555-0142",
+    "email": "maria@crosscreekrealty.com",
+    "languages": ["English", "Mandarin"],
+    "specialties": ["First-Time Buyers", "Investment"],
+    "office": "Sandy Springs",
+    "bio": "Trusted advisor helping first-time buyers and investors navigate the market with confidence.",
+    "social": {"instagram": "https://instagram.com"},
+    "serviceAreas": ["sandy-springs", "dunwoody", "brookhaven"]
+  },
+  {
+    "id": "a3",
+    "slug": "luis-ortega",
+    "name": "Luis Ortega",
+    "title": "Associate",
+    "photo": "/file.svg",
+    "phone": "+1 (770) 555-0178",
+    "email": "luis@crosscreekrealty.com",
+    "languages": ["English", "Spanish"],
+    "specialties": ["New Construction", "Condos"],
+    "office": "Alpharetta",
+    "bio": "Focused on North Fulton and new construction communities with a concierge mindset.",
+    "social": {"facebook": "https://facebook.com"},
+    "serviceAreas": ["alpharetta", "johns-creek", "roswell"]
+  }
+]
+
+

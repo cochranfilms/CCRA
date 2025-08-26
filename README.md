@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Cross Creek Realty — Next.js App Router site.
 
 ## Getting Started
 
@@ -15,6 +15,23 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Environment
+
+Copy `.env.example` to `.env.local` and set keys:
+
+- `NEXT_PUBLIC_MAPBOX_TOKEN`
+- `PLACES_API_KEY`
+- `POSTMARK_API_KEY` or EmailJS keys
+- `NEXT_PUBLIC_BASE_URL`
+
+### Content
+
+- Edit JSON seeds: `/content/agents.json`, `/content/communities.json`, `/content/listings.json`
+
+### Theming
+
+- Update brand tokens in `src/app/globals.css`: `--brand-primary`, `--brand-deep`, `--brand-accent`, base neutrals
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
@@ -34,3 +51,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+### Editing navigation
+
+The primary navigation is config-driven. Edit `src/components/layout/nav.config.ts` to add, remove, or reorder items.
+
+- `label`: Display text
+- `href`: Optional direct link
+- `children`: Optional child links with `label`, `href`, and optional `description`
+- `ctaHref`/`ctaLabel`: Optional right-aligned CTA inside dropdowns
+
+Components involved:
+
+- `Header.tsx`: Two-row sticky header with shrink-on-scroll
+- `MainNav.tsx`: Pill-style nav, active state, focus ring
+- `NavDropdown.tsx`: Accessible dropdown with keyboard support and animation
+- `MobileDrawer.tsx`: Full-height mobile drawer with accordions and pinned CTAs

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "l1",
+    "slug": "123-oak-ridge",
+    "address": "123 Oak Ridge Dr, Alpharetta, GA",
+    "lat": 34.0801,
+    "lng": -84.2802,
+    "price": 975000,
+    "beds": 4,
+    "baths": 3.5,
+    "sqft": 3200,
+    "photos": ["/vercel.svg", "/next.svg"],
+    "communitySlug": "alpharetta",
+    "agentIds": ["a2"],
+    "features": ["Open floor plan", "Chef's kitchen", "Large backyard"],
+    "status": "active"
+  },
+  {
+    "id": "l2",
+    "slug": "45-peachtree-ave",
+    "address": "45 Peachtree Ave NE, Atlanta, GA",
+    "lat": 33.8431,
+    "lng": -84.3808,
+    "price": 1850000,
+    "beds": 5,
+    "baths": 4,
+    "sqft": 4200,
+    "photos": ["/globe.svg", "/file.svg"],
+    "communitySlug": "buckhead",
+    "agentIds": ["a1"],
+    "features": ["Pool", "Guest suite", "Three-car garage"],
+    "status": "active"
+  },
+  {
+    "id": "l3",
+    "slug": "200-10th-street",
+    "address": "200 10th St NE, Atlanta, GA",
+    "lat": 33.7815,
+    "lng": -84.381,
+    "price": 635000,
+    "beds": 2,
+    "baths": 2,
+    "sqft": 1400,
+    "photos": ["/window.svg", "/vercel.svg"],
+    "communitySlug": "midtown",
+    "agentIds": ["a3"],
+    "features": ["City views", "Walk to park", "Gym"],
+    "status": "active"
+  }
+]
+
+

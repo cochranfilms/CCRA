@@ -1,26 +1,158 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base neutrals */
+  --background: #f7f7f9;
+  --foreground: #0b0b10;
+  --muted: #e9e9ee;
+
+  /* Brand */
+  --brand-primary: #e0ab0f; /* gold */
+  --brand-deep: #010046;    /* deep navy */
+  --brand-accent: #e4c77b;  /* soft gold */
+
+  /* Semantic surface tokens */
+  --bg: var(--background);
+  --fg: var(--foreground);
+  --surface: #ffffff;
+  --surface-contrast: #0b0b10;
+  --ring: color-mix(in oklab, var(--brand-primary) 60%, black);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-muted: var(--muted);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-accent: var(--brand-accent);
+  --color-surface: var(--surface);
+  --color-surface-contrast: var(--surface-contrast);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Radius and shadow */
+  --radius-xl: 1.5rem; /* brand rounded pill */
+  --shadow-card: 0 10px 30px -10px rgb(0 0 0 / 0.15);
+
+  /* Spacing rhythm */
+  --spacing-section-y: 6rem;
+  --spacing-section-y-md: 8rem;
+  --spacing-section-y-lg: 10rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0b0b10;
+    --foreground: #f7f7f9;
+    --muted: #1b1b22;
+    --surface: #0f0f14;
+    --surface-contrast: #fafafa;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--fg);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Section rhythm */
+.section {
+  padding-top: var(--spacing-section-y);
+  padding-bottom: var(--spacing-section-y);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-top: var(--spacing-section-y-md);
+    padding-bottom: var(--spacing-section-y-md);
+  }
+}
+
+@media (min-width: 1280px) {
+  .section {
+    padding-top: var(--spacing-section-y-lg);
+    padding-bottom: var(--spacing-section-y-lg);
+  }
+}
+
+.container-wide {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 80rem;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.btn-primary {
+  background: var(--brand-deep);
+  color: #fff;
+  border-radius: 9999px;
+  padding: 0.75rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.btn-primary:hover {
+  background: color-mix(in oklab, var(--brand-deep) 85%, white);
+}
+
+.btn-outline {
+  border: 1px solid var(--brand-deep);
+  color: var(--brand-deep);
+  background: transparent;
+  border-radius: 9999px;
+  padding: 0.625rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.btn-outline:hover {
+  background: color-mix(in oklab, var(--brand-deep) 10%, white);
+}
+
+.focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 60%, transparent);
+}
+
+/* Gold CTA */
+.btn-gold {
+  background: var(--brand-primary);
+  color: var(--brand-deep);
+  border-radius: 9999px;
+  padding: 0.75rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  line-height: 1;
+}
+.btn-gold:hover {
+  background: color-mix(in oklab, var(--brand-primary) 88%, white);
+}
+
+/* Typography weights */
+h1, h2, h3, h4, h5, h6 { font-weight: 600; }
+a { font-weight: 500; }
+
+/* Animations */
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-dropdown { animation: dropdownFade 180ms ease-out; }
