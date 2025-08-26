@@ -34,7 +34,7 @@ export default async function FindAgentPage({ searchParams }: { searchParams?: P
               {filtered.map((a) => (
                 <Link key={a.id} href={`/agents/${a.slug}`} className="card p-4 flex items-center gap-4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={a.photo} alt={a.name} className="w-16 h-16 rounded-lg object-cover bg-[var(--muted)]" />
+                  <img src={a.photo} alt={a.name} className="w-16 h-16 rounded-none object-cover bg-[var(--muted)]" />
                   <div>
                     <div className="font-medium">{a.name}</div>
                     <div className="text-sm opacity-80">{a.title}</div>
@@ -46,9 +46,9 @@ export default async function FindAgentPage({ searchParams }: { searchParams?: P
         </div>
         <div className="mt-8">
           <form className="card p-4 grid md:grid-cols-4 gap-3" action="/api/leads" method="post">
-            <input className="p-3 rounded-lg bg-transparent border" name="name" placeholder="Name" required />
-            <input className="p-3 rounded-lg bg-transparent border" name="email" placeholder="Email" required />
-            <input className="p-3 rounded-lg bg-transparent border" name="zip" placeholder="ZIP" />
+            <input className="p-3 rounded-none bg-transparent border" name="name" placeholder="Name" required />
+            <input className="p-3 rounded-none bg-transparent border" name="email" placeholder="Email" required />
+            <input className="p-3 rounded-none bg-transparent border" name="zip" placeholder="ZIP" />
             <button className="btn-primary" type="submit">Match Me</button>
           </form>
         </div>

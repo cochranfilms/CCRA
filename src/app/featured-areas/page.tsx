@@ -19,7 +19,7 @@ export default async function FeaturedAreasPage() {
 
       <Section>
         <div className="container-wide">
-          <div className="rounded-xl overflow-hidden bg-[var(--muted)]/40 h-80 flex items-center justify-center">
+          <div className="rounded-none overflow-hidden bg-[var(--muted)]/40 h-80 flex items-center justify-center">
             <div className="text-center">
               <div className="font-medium mb-1">Featured Areas Map</div>
               <div className="text-sm opacity-70">Add interactive Mapbox map here with polygons and markers</div>

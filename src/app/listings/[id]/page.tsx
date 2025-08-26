@@ -23,7 +23,7 @@ export default async function ListingDetail({ params }: Props) {
               <div className="grid grid-cols-3 gap-2">
                 {listing.photos.map((src, i) => (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img key={i} src={src} alt="" className={`rounded-lg object-cover w-full h-28 md:h-40 ${i === 0 ? 'col-span-3 h-56 md:h-80' : ''}`} />
+                  <img key={i} src={src} alt="" className={`rounded-none object-cover w-full h-28 md:h-40 ${i === 0 ? 'col-span-3 h-56 md:h-80' : ''}`} />
                 ))}
               </div>
             )}
@@ -50,7 +50,7 @@ export default async function ListingDetail({ params }: Props) {
       <Section>
         <div className="container-wide">
           <h2 className="text-2xl font-semibold mb-4">Map</h2>
-          <div className="h-72 rounded-xl bg-[var(--muted)]/40 flex items-center justify-center">
+          <div className="h-72 rounded-none bg-[var(--muted)]/40 flex items-center justify-center">
             <div className="text-center">
               <div className="font-medium mb-1">Map placeholder</div>
               <div className="text-sm opacity-70">Lat {listing.lat.toFixed(4)}, Lng {listing.lng.toFixed(4)}</div>

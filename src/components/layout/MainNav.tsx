@@ -93,7 +93,7 @@ export default function MainNav({ items }: Props) {
                 <button
                   ref={(el) => { buttonsRef.current[idx] = el; }}
                   className={[
-                    'px-3 py-2 rounded-full border text-[color:var(--brand-deep)] bg-white transition shadow-[0_1px_0_rgba(1,0,70,0.08)]',
+                    'px-3 py-2 rounded-none border text-[color:var(--brand-deep)] bg-white transition shadow-[0_1px_0_rgba(1,0,70,0.08)] whitespace-nowrap leading-none',
                     'hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]',
                     'font-medium',
                     active ? 'bg-[var(--brand-deep)] text-white border-[var(--brand-deep)] font-semibold' : 'border-[var(--brand-deep)]',
@@ -114,7 +114,7 @@ export default function MainNav({ items }: Props) {
                   href={item.href || '#'}
                   ref={(el) => { buttonsRef.current[idx] = el as unknown as HTMLButtonElement; }}
                   className={[
-                    'px-3 py-2 rounded-full border text-[color:var(--brand-deep)] bg-white transition shadow-[0_1px_0_rgba(1,0,70,0.08)]',
+                    'px-3 py-2 rounded-none border text-[color:var(--brand-deep)] bg-white transition shadow-[0_1px_0_rgba(1,0,70,0.08)] whitespace-nowrap leading-none',
                     'hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]',
                     'font-medium',
                     active ? 'bg-[var(--brand-deep)] text-white border-[var(--brand-deep)] font-semibold' : 'border-[var(--brand-deep)]',

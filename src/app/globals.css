@@ -95,7 +95,7 @@ body {
 .btn-primary {
   background: var(--brand-deep);
   color: #fff;
-  border-radius: 9999px;
+  border-radius: 0;
   padding: 0.75rem 1.25rem;
   display: inline-flex;
   align-items: center;
@@ -112,7 +112,7 @@ body {
   border: 1px solid var(--brand-deep);
   color: var(--brand-deep);
   background: transparent;
-  border-radius: 9999px;
+  border-radius: 0;
   padding: 0.625rem 1rem;
   display: inline-flex;
   align-items: center;
@@ -134,7 +134,7 @@ body {
 .btn-gold {
   background: var(--brand-primary);
   color: var(--brand-deep);
-  border-radius: 9999px;
+  border-radius: 0;
   padding: 0.75rem 1.25rem;
   display: inline-flex;
   align-items: center;

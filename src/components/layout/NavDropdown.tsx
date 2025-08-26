@@ -68,7 +68,7 @@ export default function NavDropdown({ id, open, items, ctaHref, ctaLabel, anchor
         <div className={`grid gap-2`} style={{ gridTemplateColumns: `repeat(${columns}, minmax(0,1fr))` }}>
           {items.map((child) => (
             <div key={child.label} className="min-w-0">
-              <Link href={child.href} className="block rounded-lg px-3 py-2 hover:bg-[var(--muted)]/50 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
+              <Link href={child.href} className="block rounded-none px-3 py-2 hover:bg-[var(--muted)]/50 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
                 <div className="font-medium text-[color:var(--brand-deep)]">{child.label}</div>
                 {child.description && (
                   <div className="text-sm opacity-80 line-clamp-2">{child.description}</div>

@@ -30,36 +30,36 @@ export default function CalculatorClient() {
       <form className="card p-4 grid gap-3 lg:col-span-2">
         <label className="grid gap-1">
           <span className="text-sm opacity-80">Home Price</span>
-          <input type="number" className="p-3 rounded-lg bg-transparent border" value={price} onChange={(e) => setPrice(Number(e.target.value))} />
+          <input type="number" className="p-3 rounded-none bg-transparent border" value={price} onChange={(e) => setPrice(Number(e.target.value))} />
         </label>
         <div className="grid grid-cols-2 gap-3">
           <label className="grid gap-1">
             <span className="text-sm opacity-80">Down Payment %</span>
-            <input type="number" className="p-3 rounded-lg bg-transparent border" value={downPct} onChange={(e) => setDownPct(Number(e.target.value))} />
+            <input type="number" className="p-3 rounded-none bg-transparent border" value={downPct} onChange={(e) => setDownPct(Number(e.target.value))} />
           </label>
           <label className="grid gap-1">
             <span className="text-sm opacity-80">Interest Rate %</span>
-            <input type="number" className="p-3 rounded-lg bg-transparent border" value={ratePct} onChange={(e) => setRatePct(Number(e.target.value))} />
+            <input type="number" className="p-3 rounded-none bg-transparent border" value={ratePct} onChange={(e) => setRatePct(Number(e.target.value))} />
           </label>
         </div>
         <div className="grid grid-cols-2 gap-3">
           <label className="grid gap-1">
             <span className="text-sm opacity-80">Loan Term (years)</span>
-            <input type="number" className="p-3 rounded-lg bg-transparent border" value={years} onChange={(e) => setYears(Number(e.target.value))} />
+            <input type="number" className="p-3 rounded-none bg-transparent border" value={years} onChange={(e) => setYears(Number(e.target.value))} />
           </label>
           <label className="grid gap-1">
             <span className="text-sm opacity-80">HOA (monthly)</span>
-            <input type="number" className="p-3 rounded-lg bg-transparent border" value={hoa} onChange={(e) => setHoa(Number(e.target.value))} />
+            <input type="number" className="p-3 rounded-none bg-transparent border" value={hoa} onChange={(e) => setHoa(Number(e.target.value))} />
           </label>
         </div>
         <div className="grid grid-cols-2 gap-3">
           <label className="grid gap-1">
             <span className="text-sm opacity-80">Property Tax %</span>
-            <input type="number" className="p-3 rounded-lg bg-transparent border" value={taxPct} onChange={(e) => setTaxPct(Number(e.target.value))} />
+            <input type="number" className="p-3 rounded-none bg-transparent border" value={taxPct} onChange={(e) => setTaxPct(Number(e.target.value))} />
           </label>
           <label className="grid gap-1">
             <span className="text-sm opacity-80">Home Insurance %</span>
-            <input type="number" className="p-3 rounded-lg bg-transparent border" value={insPct} onChange={(e) => setInsPct(Number(e.target.value))} />
+            <input type="number" className="p-3 rounded-none bg-transparent border" value={insPct} onChange={(e) => setInsPct(Number(e.target.value))} />
           </label>
         </div>
       </form>

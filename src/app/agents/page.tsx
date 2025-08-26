@@ -64,7 +64,7 @@ export default async function AgentsPage({ searchParams }: { searchParams?: Prom
                 <div className="text-sm opacity-80">{a.title}</div>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {a.specialties.slice(0, 3).map((tag) => (
-                    <span key={tag} className="text-xs px-2 py-1 rounded-full border border-[var(--brand-deep)]/20">{tag}</span>
+                    <span key={tag} className="text-xs px-2 py-1 rounded-none border border-[var(--brand-deep)]/20">{tag}</span>
                   ))}
                 </div>
               </div>

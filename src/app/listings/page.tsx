@@ -14,7 +14,7 @@ export default async function ListingsIndex({ searchParams }: { searchParams?: P
       <div className="container-wide">
         <h1 className="text-3xl md:text-4xl font-semibold mb-6">Listings</h1>
         <form className="mb-6 flex gap-2" action="/listings">
-          <input className="p-3 rounded-lg bg-transparent border flex-1" name="q" placeholder="Search by address, city, school, ZIP" defaultValue={q} />
+          <input className="p-3 rounded-none bg-transparent border flex-1" name="q" placeholder="Search by address, city, school, ZIP" defaultValue={q} />
           <button className="btn-primary">Search</button>
         </form>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

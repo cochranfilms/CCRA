@@ -56,16 +56,16 @@ export default function BookPage() {
             <button onClick={() => setRole('Seller')} className={`btn-outline ${role==='Seller' ? 'bg-[var(--brand-deep)] text-white' : ''}`}>Seller</button>
           </div>
           <form action={onSubmit} className="grid md:grid-cols-2 gap-4">
-            <input name="zip" placeholder="ZIP / Neighborhood" className="p-3 rounded-lg bg-transparent border" />
-            <input name="timeline" placeholder="Timeline (e.g., 0-3 months)" className="p-3 rounded-lg bg-transparent border" />
-            <input name="budget" placeholder={role==='Buyer' ? 'Budget' : 'Price Point'} className="p-3 rounded-lg bg-transparent border md:col-span-2" />
-            <input name="name" placeholder="Full Name" className="p-3 rounded-lg bg-transparent border" />
-            <input name="email" placeholder="Email" className="p-3 rounded-lg bg-transparent border" />
-            <input name="phone" placeholder="Phone" className="p-3 rounded-lg bg-transparent border" />
+            <input name="zip" placeholder="ZIP / Neighborhood" className="p-3 rounded-none bg-transparent border" />
+            <input name="timeline" placeholder="Timeline (e.g., 0-3 months)" className="p-3 rounded-none bg-transparent border" />
+            <input name="budget" placeholder={role==='Buyer' ? 'Budget' : 'Price Point'} className="p-3 rounded-none bg-transparent border md:col-span-2" />
+            <input name="name" placeholder="Full Name" className="p-3 rounded-none bg-transparent border" />
+            <input name="email" placeholder="Email" className="p-3 rounded-none bg-transparent border" />
+            <input name="phone" placeholder="Phone" className="p-3 rounded-none bg-transparent border" />
             {role === 'Buyer' ? (
-              <textarea name="preferences" placeholder="Property preferences (beds/baths/sqft/notes)" className="p-3 rounded-lg bg-transparent border md:col-span-2" />
+              <textarea name="preferences" placeholder="Property preferences (beds/baths/sqft/notes)" className="p-3 rounded-none bg-transparent border md:col-span-2" />
             ) : (
-              <textarea name="property" placeholder="Property details (beds/baths/sqft/notes)" className="p-3 rounded-lg bg-transparent border md:col-span-2" />
+              <textarea name="property" placeholder="Property details (beds/baths/sqft/notes)" className="p-3 rounded-none bg-transparent border md:col-span-2" />
             )}
             <label className="md:col-span-2 flex items-center gap-2 text-sm">
               <input type="checkbox" name="consent" /> I agree to be contacted about my inquiry.

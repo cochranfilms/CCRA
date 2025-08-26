@@ -18,7 +18,7 @@ export default function MobileDrawer({ items }: Props) {
   return (
     <>
       <button
-        className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-[var(--brand-deep)] text-[color:var(--brand-deep)]"
+        className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-none border border-[var(--brand-deep)] text-[color:var(--brand-deep)]"
         aria-label="Open menu"
         onClick={() => setOpen(true)}
       >
@@ -37,10 +37,10 @@ export default function MobileDrawer({ items }: Props) {
               <input
                 type="search"
                 placeholder="Start your search..."
-                className="flex-1 rounded-full border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                className="flex-1 rounded-none border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
               />
               <button
-                className="w-10 h-10 rounded-full border"
+                className="w-10 h-10 rounded-none border"
                 aria-label="Close menu"
                 onClick={() => setOpen(false)}
               >
@@ -61,12 +61,12 @@ export default function MobileDrawer({ items }: Props) {
                   </button>
                   <div className={expanded[item.label] ? 'pb-3 space-y-1' : 'hidden'}>
                     {item.children?.map((child) => (
-                      <Link key={child.label} href={child.href} className="block px-1 py-2 rounded hover:bg-[var(--muted)]/50">
+                      <Link key={child.label} href={child.href} className="block px-1 py-2 rounded-none hover:bg-[var(--muted)]/50">
                         {child.label}
                       </Link>
                     ))}
                     {item.href && (
-                      <Link href={item.href} className="block px-1 py-2 rounded hover:bg-[var(--muted)]/50">
+                      <Link href={item.href} className="block px-1 py-2 rounded-none hover:bg-[var(--muted)]/50">
                         View {item.label}
                       </Link>
                     )}
