@@ -1,6 +1,7 @@
 import { loadAgents } from '@/lib/data';
 import { Section } from '@/components/ui/section';
 import Link from 'next/link';
+import QuickLeadForm from '@/components/QuickLeadForm';
 
 export const metadata = {
   title: 'Find an Agent | Cross Creek Realty',
@@ -54,16 +55,9 @@ export default async function FindAgentPage({ searchParams }: { searchParams?: P
           </div>
         </div>
         <div className="mt-8">
-          <form className="card p-4 grid md:grid-cols-4 gap-3" action="/api/leads" method="post">
-            <input className="p-3 rounded-none bg-transparent border" name="name" placeholder="Name" required />
-            <input className="p-3 rounded-none bg-transparent border" name="email" placeholder="Email" required />
-            <input className="p-3 rounded-none bg-transparent border" name="zip" placeholder="ZIP" />
-            <button className="btn-primary" type="submit">Match Me</button>
-          </form>
+          <QuickLeadForm />
         </div>
       </div>
     </Section>
   );
 }
-
-

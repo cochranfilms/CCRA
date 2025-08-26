@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cross Creek Realty — Project Progress</title>
+  <style>
+    :root{--deep:#010046;--gold:#e0ab0f;--muted:#e9e9ee;--ink:#0b0b10}
+    html,body{margin:0;padding:0;font:14px/1.45 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0b0b10}
+    .page{max-width:960px;margin:0 auto;padding:36px}
+    h1{font-size:26px;margin:0 0 8px 0;color:var(--deep)}
+    h2{font-size:18px;margin:20px 0 8px 0;color:var(--deep)}
+    p{margin:6px 0}
+    .lead{font-size:15px;color:#333}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .card{border:1px solid #ddd;padding:14px;background:#fff}
+    .tag{display:inline-block;background:var(--muted);padding:3px 8px;margin:2px 6px 2px 0;border-radius:3px;font-size:12px}
+    .pill{display:inline-block;border:1px solid var(--deep);color:var(--deep);padding:3px 8px;border-radius:999px;font-size:12px;margin-right:6px}
+    ul{margin:8px 0 0 18px}
+    li{margin:3px 0}
+    hr{border:none;border-top:1px solid #ddd;margin:16px 0}
+    .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .brand{font-weight:700;letter-spacing:.2px;color:var(--deep)}
+    .status{color:#fff;background:var(--deep);padding:6px 10px;border-radius:3px;font-size:12px}
+    .note{font-size:12px;color:#555}
+    .cols-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .muted{color:#444}
+    img{max-width:100%;height:auto}
+    @media print{
+      .page{padding:20px}
+      .grid,.cols-3{gap:10px}
+      a[href]:after{content:""}
+    }
+    @media (max-width: 740px){
+      .page{padding:20px}
+      h1{font-size:22px}
+      h2{font-size:16px}
+      .lead{font-size:14px}
+      .header{flex-direction:column;align-items:flex-start;gap:8px}
+      .status{width:100%;text-align:center}
+      .grid{grid-template-columns:1fr;gap:10px}
+      .cols-3{grid-template-columns:1fr;gap:10px}
+      .card{padding:12px}
+      .pill{margin-bottom:6px}
+    }
+  </style>
+  <meta name="description" content="One-page progress report summarizing design, pages, features, and automation for Cross Creek Realty." />
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="brand">Cross Creek Realty — Project Progress</div>
+      <div class="status">Current status: In development (MVP feature set implemented)</div>
+    </div>
+
+    <p class="lead">This one-page summary highlights the site design, key pages, lead/CRM plumbing, and the automated daily blog system. It’s written for a non‑technical reader while remaining specific for accountability.</p>
+
+    <h2>Client Note: Design Phase & Data Integration</h2>
+    <div class="card">
+      <p>Mr. Clovie, these visuals are from our current design phase. We are actively wiring in your real listings, agent details, and community data now. If you have any changes or requests, please don’t hesitate to reach out.</p>
+    </div>
+
+    <h2>Design Mockups</h2>
+    <div class="cols-3">
+      <div class="card"><img src="Mockup/Mock1.png" alt="Mock 1" style="width:100%;height:auto;display:block" /><div class="note">Mock 1</div></div>
+      <div class="card"><img src="Mockup/Mock2.png" alt="Mock 2" style="width:100%;height:auto;display:block" /><div class="note">Mock 2</div></div>
+      <div class="card"><img src="Mockup/Mock3.png" alt="Mock 3" style="width:100%;height:auto;display:block" /><div class="note">Mock 3</div></div>
+      <div class="card"><img src="Mockup/Mock4.png" alt="Mock 4" style="width:100%;height:auto;display:block" /><div class="note">Mock 4</div></div>
+      <div class="card"><img src="Mockup/Mock5.png" alt="Mock 5" style="width:100%;height:auto;display:block" /><div class="note">Mock 5</div></div>
+      <div class="card"><img src="Mockup/Mock6.png" alt="Mock 6" style="width:100%;height:auto;display:block" onerror="this.parentNode.remove()" /><div class="note">Mock 6</div></div>
+    </div>
+
+    <h2>Design System and UX</h2>
+    <div class="grid">
+      <div class="card">
+        <strong>Brand & theming</strong>
+        <ul>
+          <li>Gold + deep navy palette with professional typography and spacious layout.</li>
+          <li>Responsive components and consistent spacing rhythm across sections.</li>
+          <li>Sticky header with active state navigation and mobile drawer.</li>
+        </ul>
+        <div class="note">Implemented via global CSS tokens and layout components.</div>
+      </div>
+      <div class="card">
+        <strong>Component library</strong>
+        <ul>
+          <li>Section, Card, Buttons, Header/Footer, Mega‑nav with dropdowns.</li>
+          <li>Form components for quick leads and showing requests.</li>
+          <li>Share buttons, calculator client, map embeds, and grids.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Pages Implemented</h2>
+    <div class="cols-3">
+      <div class="card">
+        <strong>Home</strong>
+        <p class="muted">Hero with search, featured listings, brand section, contact form.</p>
+      </div>
+      <div class="card">
+        <strong>Listings</strong>
+        <p class="muted">Searchable grid + detail pages with gallery, features, calculator, map, and showing form.</p>
+      </div>
+      <div class="card">
+        <strong>Communities & Featured Areas</strong>
+        <p class="muted">Service areas hero and community cards; printable map image.</p>
+      </div>
+      <div class="card">
+        <strong>Agents</strong>
+        <p class="muted">Agent index, agent detail (via slug), and dedicated Find‑an‑Agent page with lead form.</p>
+      </div>
+      <div class="card">
+        <strong>Buy, Sell, Rent</strong>
+        <p class="muted">Primary navigation categories with starting content and links.</p>
+      </div>
+      <div class="card">
+        <strong>Utilities</strong>
+        <p class="muted">Privacy, Terms, Sitemap, Robots; Thank‑you page for post‑form flow.</p>
+      </div>
+    </div>
+
+    <h2>Lead Capture and CRM Plumbing</h2>
+    <div class="grid">
+      <div class="card">
+        <strong>Unified lead endpoint</strong>
+        <ul>
+          <li>Forms post to a single API that normalizes incoming fields.</li>
+          <li>Hidden UTM parameters are auto‑captured for attribution.</li>
+          <li>Property context (address, price, beds/baths/sqft, lat/lng) is attached when available.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong>Adapters</strong>
+        <p class="muted">A pluggable adapter pattern enables swapping the CRM later (HubSpot/Salesforce/Follow Up Boss). Development uses a safe console adapter.</p>
+      </div>
+    </div>
+
+    <h2>Automated Daily Blog (No Manual Work)</h2>
+    <div class="card">
+      <p>The site includes a daily blog aggregator that pulls trusted real‑estate news sources and displays fresh posts automatically.</p>
+      <ul>
+        <li>Curated sources (NAR, Redfin News, Zillow Porchlight, HousingWire, MBA).</li>
+        <li>Smart media extraction for cover images and YouTube thumbnails.</li>
+        <li>Duplicate filtering, sorting by date, and a one‑day cache to keep content fresh.</li>
+        <li>Exposed via an API endpoint and rendered on the Blog pages.</li>
+      </ul>
+      <div class="note">Result: The blog updates itself daily without manual edits.</div>
+    </div>
+
+    <h2>APIs and Integrations</h2>
+    <div class="cols-3">
+      <div class="card">
+        <strong>Blog Feed API</strong>
+        <p class="muted">Returns aggregated posts and is set to revalidate every 24 hours.</p>
+      </div>
+      <div class="card">
+        <strong>Leads API</strong>
+        <p class="muted">Accepts JSON or form data, normalizes, and forwards to integrations.</p>
+      </div>
+      <div class="card">
+        <strong>Nearby API</strong>
+        <p class="muted">Provides nearby places stubs with caching and graceful fallback.</p>
+      </div>
+    </div>
+
+    <h2>Content and Data</h2>
+    <div class="grid">
+      <div class="card">
+        <strong>Seeded content</strong>
+        <p class="muted">Agents, Communities, and Listings are driven by JSON files to enable quick edits and future CMS/MLS wiring.</p>
+        <div>
+          <span class="tag">Agents</span>
+          <span class="tag">Communities</span>
+          <span class="tag">Listings</span>
+        </div>
+      </div>
+      <div class="card">
+        <strong>Stock assets & fallbacks</strong>
+        <p class="muted">Thoughtful placeholder images ensure pages look complete before live media arrives.</p>
+      </div>
+    </div>
+
+    <h2>Technology Stack</h2>
+    <div class="card">
+      <p>
+        <span class="pill">Next.js (App Router)</span>
+        <span class="pill">TypeScript</span>
+        <span class="pill">Tailwind (via PostCSS)</span>
+        <span class="pill">Server Components + API Routes</span>
+        <span class="pill">Open‑source fonts</span>
+      </p>
+      <p class="muted">Designed for performance, SEO, and future integrations with CRM and MLS/IDX providers.</p>
+    </div>
+
+    <hr />
+    <p class="note">Prepared for Mr. Clovie. Plain‑English overview with concrete deliverables and an automated content plan.</p>
+  </div>
+</body>
+</html>
+
+

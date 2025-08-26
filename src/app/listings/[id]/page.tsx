@@ -90,7 +90,20 @@ export default async function ListingDetail({ params }: Props) {
             </div>
           </div>
           <div className="mt-6 sticky top-24 grid gap-6">
-            <ShowingForm address={listing.address} />
+            <ShowingForm
+              address={listing.address}
+              listing={{
+                id: listing.id,
+                slug: listing.slug,
+                price: listing.price,
+                beds: listing.beds,
+                baths: listing.baths,
+                sqft: listing.sqft,
+                lat: listing.lat,
+                lng: listing.lng,
+                communitySlug: listing.communitySlug,
+              }}
+            />
           </div>
         </div>
 

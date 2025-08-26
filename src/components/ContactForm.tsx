@@ -1,11 +1,22 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { z } from 'zod';
 
 export default function ContactForm() {
   const [role, setRole] = useState<'Buyer' | 'Seller'>('Buyer');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pending, setPending] = useState(false);
+  const [utm, setUtm] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const entries: Record<string, string> = {};
+    ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach((k) => {
+      const v = params.get(k);
+      if (v) entries[k] = v;
+    });
+    setUtm(entries);
+  }, []);
 
   const baseSchema = z.object({
     role: z.enum(['Buyer', 'Seller']),
@@ -36,7 +47,8 @@ export default function ContactForm() {
       return;
     }
 
-    await fetch('/api/leads', { method: 'POST', body: JSON.stringify(parsed.data), headers: { 'Content-Type': 'application/json' } });
+    const body = { ...parsed.data, source: 'ContactForm', ...utm };
+    await fetch('/api/leads', { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } });
     window.location.href = '/thank-you';
   }
 
@@ -76,6 +88,10 @@ export default function ContactForm() {
         <div className="text-sm text-red-600 md:col-span-2">
           {Object.values(errors).slice(0,1)}
         </div>
+        {/* Hidden UTM fields for future CRM mapping */}
+        {Object.entries(utm).map(([k,v]) => (
+          <input key={k} name={k} defaultValue={v} className="hidden" readOnly />
+        ))}
         <button disabled={pending} className="btn-primary md:col-span-2">{pending ? 'Submitting…' : 'Submit'}</button>
       </form>
     </div>

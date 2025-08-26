@@ -10,12 +10,16 @@ export default async function FeaturedAreasPage() {
   const featured = communities.slice(0, 4);
   return (
     <>
-      <Section contained={false}>
-        <div className="container-wide">
+      <section
+        className="relative section overflow-hidden"
+        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2000&auto=format&fit=crop')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+      >
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="relative container-wide text-white">
           <h1 className="text-3xl md:text-5xl font-semibold">Our Service Areas</h1>
-          <p className="opacity-80 mt-2 max-w-2xl">Discover Atlanta&#39;s most sought-after neighborhoods and communities.</p>
+          <p className="mt-2 max-w-2xl opacity-95">Discover Atlanta&#39;s most sought-after neighborhoods and communities.</p>
         </div>
-      </Section>
+      </section>
 
       <Section variant="dark">
         <div className="container-wide">
@@ -24,16 +28,14 @@ export default async function FeaturedAreasPage() {
         </div>
       </Section>
 
-      <Section>
-        <div className="container-wide">
-          <div className="rounded-none overflow-hidden bg-[var(--muted)]/40 h-80">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/featured-map.webp"
-              alt="Service areas map"
-              className="w-full h-full object-cover"
-            />
-          </div>
+      <Section contained={false}>
+        <div className="relative w-full overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/featured-map.jpg"
+            alt="Service areas map"
+            className="w-full h-auto block"
+          />
         </div>
       </Section>
 

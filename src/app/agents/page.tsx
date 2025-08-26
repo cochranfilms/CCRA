@@ -84,8 +84,30 @@ export default async function AgentsPage({ searchParams }: { searchParams?: Prom
 
       <Section variant="dark">
         <div className="container-wide">
-          <h2 className="text-2xl font-semibold mb-4">Work with a specialist</h2>
-          <p className="opacity-90 max-w-3xl">Luxury, new construction, relocation, investment, and more — we match you with the right advisor for your goals.</p>
+          <h2 className="text-2xl font-semibold mb-6">Work with a specialist</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="card p-6 text-[color:var(--brand-deep)] flex flex-col items-start">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/window.svg" alt="Buy a home" className="w-16 h-16 mb-4" />
+              <h3 className="text-xl font-semibold">Buy a home</h3>
+              <p className="opacity-80 mt-2">Connect with a local expert. Get transparent estimates and insights drawn from MLS comps.</p>
+              <Link href="/find-an-agent" className="btn-outline mt-4">Find a local agent</Link>
+            </div>
+            <div className="card p-6 text-[color:var(--brand-deep)] flex flex-col items-start">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/globe.svg" alt="Rent a home" className="w-16 h-16 mb-4" />
+              <h3 className="text-xl font-semibold">Rent a home</h3>
+              <p className="opacity-80 mt-2">Browse verified rentals. Coming soon: MLS-sourced vacancy and pricing trends.</p>
+              <Link href="/rent" className="btn-outline mt-4">Find rentals</Link>
+            </div>
+            <div className="card p-6 text-[color:var(--brand-deep)] flex flex-col items-start">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/file.svg" alt="See today's rates" className="w-16 h-16 mb-4" />
+              <h3 className="text-xl font-semibold">See today&apos;s rates</h3>
+              <p className="opacity-80 mt-2">Live mortgage rate snapshots and affordability charts will pull from lender/MLS integrations.</p>
+              <Link href="/calculator" className="btn-outline mt-4">See rates</Link>
+            </div>
+          </div>
         </div>
       </Section>
     </>

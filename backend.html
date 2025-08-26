@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cross Creek Realty — Backend Notes</title>
+  <style>
+    html,body{margin:0;padding:0;font:14px/1.5 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0b0b10}
+    .page{max-width:960px;margin:0 auto;padding:36px}
+    h1{font-size:24px;margin:0 0 8px 0}
+    h2{font-size:18px;margin:18px 0 8px}
+    h3{font-size:15px;margin:14px 0 6px}
+    code{background:#f3f3f6;padding:1px 5px;border-radius:3px}
+    pre{background:#0f0f14;color:#f7f7f9;padding:12px;border-radius:4px;overflow:auto}
+    .card{border:1px solid #ddd;padding:14px;background:#fff;margin:8px 0}
+    ul{margin:8px 0 0 18px}
+    li{margin:3px 0}
+    .note{color:#444;font-size:12px}
+    @media print{a[href]:after{content:""}.page{padding:22px}}
+  </style>
+  <meta name="description" content="Developer runbook: CRM/CMS/MLS setup, APIs, content, and stock media map." />
+</head>
+<body>
+  <div class="page">
+    <h1>Backend / Integrations Runbook</h1>
+    <p class="note">This is a technical companion for future onboarding. It explains how leads, content, APIs, and placeholders are wired today, and what to change when connecting real services.</p>
+
+    <h2>Local Development</h2>
+    <div class="card">
+      <ul>
+        <li>Install deps and run dev server:</li>
+      </ul>
+      <pre>npm install
+npm run dev
+# http://localhost:3000</pre>
+      <ul>
+        <li>Environment file: copy <code>.env.example</code> to <code>.env.local</code> and set keys.</li>
+      </ul>
+    </div>
+
+    <h2>Environment Variables</h2>
+    <div class="card">
+      <pre># Base URL for server components to call API routes (optional in production)
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# Google Places (optional; Nearby API has a fallback)
+PLACES_API_KEY=your_key_here
+
+# EmailJS (optional; for client-form delivery if desired)
+EMAILJS_SERVICE_ID=
+EMAILJS_TEMPLATE_ID=
+EMAILJS_PUBLIC_KEY=
+
+# CRM selection placeholder
+CRM_PROVIDER=CONSOLE</pre>
+    </div>
+
+    <h2>CRM and Leads Flow</h2>
+    <div class="card">
+      <h3>Where:</h3>
+      <ul>
+        <li>Lead normalization and adapter: <code>src/lib/crm.ts</code></li>
+        <li>Lead API endpoint: <code>src/app/api/leads/route.ts</code></li>
+        <li>Client forms: <code>src/components/ui/ShowingForm.tsx</code>, <code>src/components/QuickLeadForm.tsx</code></li>
+        <li>Types: <code>src/types/data.ts</code></li>
+      </ul>
+      <h3>How it works:</h3>
+      <ul>
+        <li>All forms POST to <code>/api/leads</code> (JSON or form-data accepted).</li>
+        <li>Endpoint normalizes fields, attaches UTM params and property context, then calls <code>sendLeadToIntegrations</code>.</li>
+        <li>Current adapter is <em>ConsoleCRM</em> (safe dev no-op). Swap later by implementing <code>CRMAdapter</code> and returning it from <code>getCRM()</code>.</li>
+      </ul>
+      <h3>To integrate a real CRM:</h3>
+      <ol>
+        <li>Create a new adapter in <code>src/lib/crm.ts</code> (e.g., <code>HubSpotCRM</code>), implement <code>sendLead</code>.</li>
+        <li>Update <code>getCRM()</code> to switch on <code>process.env.CRM_PROVIDER</code>.</li>
+        <li>Deploy with provider-specific env vars/secrets.</li>
+      </ol>
+    </div>
+
+    <h2>Blog Aggregator (Daily)</h2>
+    <div class="card">
+      <ul>
+        <li>Aggregator: <code>src/lib/blogAggregator.ts</code></li>
+        <li>Feed API: <code>src/app/api/blog-feed/route.ts</code> (revalidates every 24h)</li>
+        <li>Behavior: pulls NAR, Redfin News, Zillow Porchlight, HousingWire, MBA; extracts covers; dedupes; sorts; caches for one day with <code>getDailyCachedPosts</code>.</li>
+      </ul>
+      <p class="note">No cron required for development; ISR + in-memory day cache handles freshness. Can be moved to edge KV or scheduler later.</p>
+    </div>
+
+    <h2>CMS / Content</h2>
+    <div class="card">
+      <ul>
+        <li>Seeded JSON content:
+          <ul>
+            <li><code>content/agents.json</code></li>
+            <li><code>content/communities.json</code></li>
+            <li><code>content/listings.json</code></li>
+          </ul>
+        </li>
+        <li>Loader utilities: <code>src/lib/data.ts</code></li>
+        <li>Pages resolve from JSON now, and can be swapped to a headless CMS later without changing page code.</li>
+      </ul>
+    </div>
+
+    <h2>MLS/IDX Readiness</h2>
+    <div class="card">
+      <ul>
+        <li>Listing detail is structured for MLS/IDX data: gallery, facts, features, map, nearby, calculator, showing form.</li>
+        <li>Property context fields are already included in lead submissions for later mapping to IDX/CRM.</li>
+        <li>To integrate IDX: replace JSON loaders with API queries or connect to your IDX provider SDK and map responses to <code>Listing</code> type.</li>
+      </ul>
+    </div>
+
+    <h2>APIs</h2>
+    <div class="card">
+      <ul>
+        <li><code>/api/leads</code>: accepts leads; normalizes and forwards to CRM adapter.</li>
+        <li><code>/api/blog-feed</code>: returns aggregated posts; CDN/edge revalidate in 24h.</li>
+        <li><code>/api/nearby</code>: returns nearby places (stub) with a 5‑minute cache and fallback when <code>PLACES_API_KEY</code> is unset.</li>
+      </ul>
+    </div>
+
+    <h2>Stock Media Map (What to replace and where)</h2>
+    <div class="card">
+      <p>Primary placeholder files in <code>public/</code>:</p>
+      <ul>
+        <li><code>/public/logo.webp</code> — site logo (header)</li>
+        <li><code>/public/featured-map.jpg</code> — Featured Areas map image</li>
+        <li><code>/public/globe.svg</code>, <code>/public/window.svg</code>, <code>/public/file.svg</code>, <code>/public/next.svg</code>, <code>/public/vercel.svg</code> — icon placeholders used across seeds</li>
+      </ul>
+      <p>Where each is referenced:</p>
+      <ul>
+        <li>Header logo image: <code>src/components/layout/header.tsx</code> uses <code>src="/logo.webp"</code></li>
+        <li>Featured Areas map: <code>src/app/featured-areas/page.tsx</code> uses <code>src="/featured-map.jpg"</code></li>
+        <li>Agents/Communities/Listings seeds use SVG placeholders:
+          <ul>
+            <li><code>content/agents.json</code> photos: <code>/window.svg</code>, <code>/globe.svg</code>, <code>/file.svg</code></li>
+            <li><code>content/communities.json</code> heroImage: <code>/window.svg</code>, <code>/globe.svg</code>, <code>/file.svg</code></li>
+            <li><code>content/listings.json</code> photos: <code>/vercel.svg</code>, <code>/next.svg</code>, <code>/globe.svg</code>, <code>/file.svg</code>, <code>/window.svg</code></li>
+          </ul>
+        </li>
+        <li>Find an Agent cards also show Unsplash stocks as fallbacks: <code>src/app/find-an-agent/page.tsx</code></li>
+        <li>Listings index/detail use Unsplash fallbacks when photos are missing: <code>src/app/listings/page.tsx</code>, <code>src/app/listings/[id]/page.tsx</code></li>
+        <li>Home hero and sections use Unsplash URLs directly: <code>src/app/page.tsx</code></li>
+      </ul>
+      <p class="note">To replace with local files, put images under <code>public/images/</code> and replace URLs with <code>src="/images/your-file.jpg"</code> or CSS <code>url('/images/your-file.jpg')</code>. See <code>docs/stock-images.md</code> for a step‑by‑step guide.</p>
+    </div>
+
+    <h2>Navigation and Layout</h2>
+    <div class="card">
+      <ul>
+        <li>Config-driven nav: <code>src/components/layout/nav.config.ts</code></li>
+        <li>Header: <code>src/components/layout/header.tsx</code>; Footer: <code>src/components/layout/footer.tsx</code></li>
+        <li>Global theme tokens and utilities: <code>src/app/globals.css</code></li>
+      </ul>
+    </div>
+
+    <h2>Printing and Deployment</h2>
+    <div class="card">
+      <ul>
+        <li>This document and <code>progress.html</code> are print‑friendly.</li>
+        <li>Production deployment can target any Node/Edge host; Next.js App Router is used with API routes and ISR.</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>
+
+

@@ -94,7 +94,8 @@ export default function MainNav({ items }: Props) {
                   href={item.href || '#'}
                   ref={(el) => { buttonsRef.current[idx] = el as unknown as HTMLButtonElement; }}
                   className={[
-                    'px-3 py-2 rounded-none border text-white bg-transparent transition whitespace-nowrap leading-none',
+                    'px-3 py-0 h-10 rounded-none border text-white bg-transparent transition whitespace-nowrap leading-none',
+                    'inline-flex items-center justify-center text-center w-[148px] text-[15px]',
                     'hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]',
                     'font-medium',
                     active ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold' : 'border-white',
@@ -116,7 +117,8 @@ export default function MainNav({ items }: Props) {
                   href={item.href || '#'}
                   ref={(el) => { buttonsRef.current[idx] = el as unknown as HTMLButtonElement; }}
                   className={[
-                    'px-3 py-2 rounded-none border text-white bg-transparent transition whitespace-nowrap leading-none',
+                    'px-3 py-0 h-10 rounded-none border text-white bg-transparent transition whitespace-nowrap leading-none',
+                    'inline-flex items-center justify-center text-center w-[148px] text-[15px]',
                     'hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]',
                     'font-medium',
                     active ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold' : 'border-white',
@@ -145,10 +147,10 @@ export default function MainNav({ items }: Props) {
       </ul>
       <div className="flex-1 flex items-center justify-end gap-2">
         {primaryCtas.contact && (
-          <Link href={primaryCtas.contact.href || '/#contact'} className="btn-outline-inverse font-semibold">{primaryCtas.contact.label}</Link>
+          <Link href={primaryCtas.contact.href || '/#contact'} className="btn-outline-inverse font-semibold h-10 px-4 py-0 inline-flex items-center justify-center">{primaryCtas.contact.label}</Link>
         )}
         {primaryCtas.blog && (
-          <Link href={primaryCtas.blog.href || '/blog'} className="btn-outline-inverse font-semibold">{primaryCtas.blog.label}</Link>
+          <Link href={primaryCtas.blog.href || '/blog'} className="btn-outline-inverse font-semibold h-10 px-4 py-0 inline-flex items-center justify-center">{primaryCtas.blog.label}</Link>
         )}
       </div>
     </nav>

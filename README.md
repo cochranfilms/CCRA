@@ -25,6 +25,31 @@ Copy `.env.example` to `.env.local` and set keys:
 - `POSTMARK_API_KEY` or EmailJS keys
 - `NEXT_PUBLIC_BASE_URL`
 
+### Lead/CRM Integration
+
+Leads post to `api/leads`, which normalizes payloads and forwards them to a pluggable CRM adapter. Currently a console adapter is used as a safe default for development.
+
+- Hidden UTM fields (`utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`) are auto-captured on forms and included in submissions.
+- Property context (listing id/slug, address, lat/lng, beds/baths/sqft, price) is attached on the listing showing form for future MLS/IDX mapping.
+
+Environment variables reserved for integrations:
+
+```
+# Base URL for server components to call API routes (optional in production)
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# Places API (optional; nearby uses fallback if unset)
+PLACES_API_KEY=your_key_here
+
+# EmailJS (to be wired into client forms if desired)
+EMAILJS_SERVICE_ID=
+EMAILJS_TEMPLATE_ID=
+EMAILJS_PUBLIC_KEY=
+
+# CRM selection (placeholder for future adapters)
+CRM_PROVIDER=CONSOLE
+```
+
 ### Content
 
 - Edit JSON seeds: `/content/agents.json`, `/content/communities.json`, `/content/listings.json`

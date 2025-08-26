@@ -33,7 +33,9 @@ export default async function ListingsIndex({ searchParams }: { searchParams?: P
               <div className="aspect-[4/3] bg-[var(--muted)] overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={((l as any).photos?.[0] && !(l as any).photos?.[0].endsWith('.svg')) ? (l as any).photos[0] : STOCK[idx % STOCK.length]}
+                  src={(Array.isArray((l as unknown as { photos?: string[] }).photos) && (l as unknown as { photos?: string[] }).photos![0] && !((l as unknown as { photos?: string[] }).photos![0] as string).endsWith('.svg'))
+                    ? (l as unknown as { photos?: string[] }).photos![0] as string
+                    : STOCK[idx % STOCK.length]}
                   alt="Listing photo"
                   className="w-full h-full object-cover transition-transform group-hover:scale-[1.03]"
                 />
