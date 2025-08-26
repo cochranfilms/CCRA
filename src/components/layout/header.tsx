@@ -26,15 +26,19 @@ export function Header() {
             <span>✉ info@crosscreekrealty.com</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/book" className="underline">Contact</Link>
+            <Link href="/#contact" className="underline">Contact</Link>
             <Link href="/" className="underline">Sign In</Link>
           </div>
         </div>
       </div>
-      <div className="border-b">
+      <div className="border-b bg-[var(--brand-deep)]">
         <div className={`container-wide flex items-center justify-between ${scrolled ? 'h-[56px]' : 'h-16'} transition-[height]`}>
           <div className="flex items-center gap-3">
-            <Link href="/" className="font-semibold text-[color:var(--brand-deep)]">Cross Creek Realty</Link>
+            <Link href="/" className="inline-flex items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.webp" alt="Cross Creek Realty" className="h-8 md:h-9 w-auto" />
+              <span className="sr-only">Cross Creek Realty</span>
+            </Link>
           </div>
           <MainNav items={NAV_ITEMS} />
           <div className="md:hidden flex items-center gap-2">

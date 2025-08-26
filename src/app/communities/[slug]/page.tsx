@@ -33,14 +33,26 @@ export default async function CommunityDetail({ params }: Props) {
               </div>
             )}
             right={(
-              <div className="rounded-xl overflow-hidden h-64 md:h-80 bg-[var(--muted)]/40 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="font-medium mb-1">Map placeholder</div>
-                  <div className="text-sm opacity-70">Add Mapbox token to enable map</div>
-                </div>
+              <div className="rounded-xl overflow-hidden h-64 md:h-80 bg-[var(--muted)]/40">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1496568816309-51d7c20e1fd5?q=80&w=1600&auto=format&fit=crop"
+                  alt="Map placeholder"
+                  className="w-full h-full object-cover"
+                />
               </div>
             )}
           />
+        </div>
+      </Section>
+      <Section variant="dark">
+        <div className="container-wide">
+          <h2 className="text-2xl font-semibold mb-4">Why people love {community.name}</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="card p-4">Parks & green space</div>
+            <div className="card p-4">Dining & retail</div>
+            <div className="card p-4">Commute & transit</div>
+          </div>
         </div>
       </Section>
 

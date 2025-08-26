@@ -50,7 +50,7 @@ export default function NavDropdown({ id, open, items, ctaHref, ctaLabel, anchor
 
   if (!open) return null;
 
-  const columns = Math.min(3, Math.max(2, Math.ceil(items.length / 3)));
+  // Render items as a single vertical column for compact menus
 
   return (
     <div
@@ -63,23 +63,25 @@ export default function NavDropdown({ id, open, items, ctaHref, ctaLabel, anchor
     >
       <div
         ref={panelRef}
-        className="card p-4 border shadow-xl bg-[var(--surface)] w-[min(80vw,720px)] animate-dropdown"
+        className="p-2 md:p-3 w-[min(90vw,280px)] animate-dropdown rounded-none shadow-[0_10px_30px_-10px_rgba(0,0,0,0.35)] bg-[var(--brand-deep)] text-white border border-white/10"
       >
-        <div className={`grid gap-2`} style={{ gridTemplateColumns: `repeat(${columns}, minmax(0,1fr))` }}>
+        <div className="flex flex-col gap-1 md:gap-2">
           {items.map((child) => (
-            <div key={child.label} className="min-w-0">
-              <Link href={child.href} className="block rounded-none px-3 py-2 hover:bg-[var(--muted)]/50 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
-                <div className="font-medium text-[color:var(--brand-deep)]">{child.label}</div>
-                {child.description && (
-                  <div className="text-sm opacity-80 line-clamp-2">{child.description}</div>
-                )}
-              </Link>
-            </div>
+            <Link
+              key={child.label}
+              href={child.href}
+              className="block px-3 py-2 rounded-none hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+            >
+              <div className="font-medium text-white">{child.label}</div>
+              {child.description && (
+                <div className="text-xs md:text-sm text-white/80 line-clamp-2">{child.description}</div>
+              )}
+            </Link>
           ))}
         </div>
         {(ctaHref && ctaLabel) && (
-          <div className="mt-3 flex justify-end">
-            <Link href={ctaHref} className="btn-primary">{ctaLabel}</Link>
+          <div className="mt-2 md:mt-3 flex justify-end">
+            <Link href={ctaHref} className="btn-gold">{ctaLabel}</Link>
           </div>
         )}
       </div>

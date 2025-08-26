@@ -15,6 +15,7 @@ export default async function AgentDetailPage({ params }: Props) {
   const agent = agents.find((a) => a.slug === slug);
   if (!agent) return <div className="container-wide section">Agent not found.</div>;
   const agentListings = getListingsByAgent(listings, agent.id);
+  const FALLBACK = 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=1200&auto=format&fit=crop';
 
   return (
     <Section>
@@ -24,7 +25,7 @@ export default async function AgentDetailPage({ params }: Props) {
             <div className="flex items-start gap-6">
               <div className="w-32 h-32 rounded-xl overflow-hidden bg-[var(--muted)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={agent.photo} alt={agent.name} className="w-full h-full object-cover" />
+                <img src={(agent.photo && !agent.photo.endsWith('.svg')) ? agent.photo : FALLBACK} alt={agent.name} className="w-full h-full object-cover" />
               </div>
               <div>
                 <h1 className="text-3xl font-semibold">{agent.name}</h1>

@@ -40,11 +40,11 @@ export default function MainNav({ items }: Props) {
   const primaryCtas = useMemo(() => {
     return {
       contact: items.find((i) => i.label === 'Contact'),
-      search: items.find((i) => i.label === 'Start Your Search'),
+      blog: items.find((i) => i.label === 'Blog'),
     };
   }, [items]);
 
-  const navItems = useMemo(() => items.filter((i) => !['Contact', 'Start Your Search'].includes(i.label)), [items]);
+  const navItems = useMemo(() => items.filter((i) => !['Contact', 'Blog', 'Start Your Search'].includes(i.label)), [items]);
 
   function onHover(idx: number | null) {
     if (hoverTimer.current) clearTimeout(hoverTimer.current);
@@ -90,35 +90,38 @@ export default function MainNav({ items }: Props) {
           return (
             <li key={item.label} className="relative" onMouseEnter={() => onHover(idx)} onMouseLeave={() => onLeave(idx)}>
               {hasChildren ? (
-                <button
-                  ref={(el) => { buttonsRef.current[idx] = el; }}
+                <Link
+                  href={item.href || '#'}
+                  ref={(el) => { buttonsRef.current[idx] = el as unknown as HTMLButtonElement; }}
                   className={[
-                    'px-3 py-2 rounded-none border text-[color:var(--brand-deep)] bg-white transition shadow-[0_1px_0_rgba(1,0,70,0.08)] whitespace-nowrap leading-none',
-                    'hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]',
+                    'px-3 py-2 rounded-none border text-white bg-transparent transition whitespace-nowrap leading-none',
+                    'hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]',
                     'font-medium',
-                    active ? 'bg-[var(--brand-deep)] text-white border-[var(--brand-deep)] font-semibold' : 'border-[var(--brand-deep)]',
+                    active ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold' : 'border-white',
                   ].join(' ')}
                   aria-haspopup="menu"
                   aria-expanded={openIndex === idx}
                   aria-controls={`menu-${idx}`}
+                  aria-current={active ? 'page' : undefined}
                   onFocus={() => setOpenIndex(idx)}
                   onBlur={(e) => {
                     if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpenIndex(null);
                   }}
-                  onKeyDown={(e) => onTopKeyDown(e, idx, hasChildren)}
+                  onKeyDown={(e) => onTopKeyDown(e as unknown as React.KeyboardEvent, idx, hasChildren)}
                 >
-                  <span>{item.label}</span>
-                </button>
+                  {item.label}
+                </Link>
               ) : (
                 <Link
                   href={item.href || '#'}
                   ref={(el) => { buttonsRef.current[idx] = el as unknown as HTMLButtonElement; }}
                   className={[
-                    'px-3 py-2 rounded-none border text-[color:var(--brand-deep)] bg-white transition shadow-[0_1px_0_rgba(1,0,70,0.08)] whitespace-nowrap leading-none',
-                    'hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]',
+                    'px-3 py-2 rounded-none border text-white bg-transparent transition whitespace-nowrap leading-none',
+                    'hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]',
                     'font-medium',
-                    active ? 'bg-[var(--brand-deep)] text-white border-[var(--brand-deep)] font-semibold' : 'border-[var(--brand-deep)]',
+                    active ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold' : 'border-white',
                   ].join(' ')}
+                  aria-current={active ? 'page' : undefined}
                   onKeyDown={(e) => onTopKeyDown(e as unknown as React.KeyboardEvent, idx, false)}
                 >
                   {item.label}
@@ -130,7 +133,7 @@ export default function MainNav({ items }: Props) {
                   id={`menu-${idx}`}
                   open={openIndex === idx}
                   onClose={() => setOpenIndex(null)}
-                  anchorClassName="absolute left-1/2 -translate-x-1/2 mt-2"
+                  anchorClassName="absolute left-0 mt-2"
                   items={item.children!}
                   ctaHref={item.ctaHref}
                   ctaLabel={item.ctaLabel}
@@ -142,15 +145,10 @@ export default function MainNav({ items }: Props) {
       </ul>
       <div className="flex-1 flex items-center justify-end gap-2">
         {primaryCtas.contact && (
-          <Link href={primaryCtas.contact.href || '/book'} className="btn-primary">{primaryCtas.contact.label}</Link>
+          <Link href={primaryCtas.contact.href || '/#contact'} className="btn-outline-inverse font-semibold">{primaryCtas.contact.label}</Link>
         )}
-        {primaryCtas.search && (
-          <Link
-            href={primaryCtas.search.href || '/listings'}
-            className="btn-gold text-[color:var(--brand-deep)] font-semibold"
-          >
-            {primaryCtas.search.label}
-          </Link>
+        {primaryCtas.blog && (
+          <Link href={primaryCtas.blog.href || '/blog'} className="btn-outline-inverse font-semibold">{primaryCtas.blog.label}</Link>
         )}
       </div>
     </nav>

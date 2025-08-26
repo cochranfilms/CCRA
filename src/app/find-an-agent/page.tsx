@@ -11,6 +11,13 @@ export default async function FindAgentPage({ searchParams }: { searchParams?: P
   const sp = (await searchParams) ?? {};
   const q = (sp.q ?? '').toLowerCase();
   const filtered = agents.filter((a) => !q || a.name.toLowerCase().includes(q));
+  const STOCK: string[] = [
+    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1541753866388-0b3c701627d3?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1200&auto=format&fit=crop',
+  ];
 
   return (
     <Section>
@@ -22,19 +29,21 @@ export default async function FindAgentPage({ searchParams }: { searchParams?: P
         </form>
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <div className="card p-4 h-[420px] flex items-center justify-center bg-[var(--muted)]/40">
-              <div className="text-center">
-                <div className="font-medium mb-1">Map placeholder</div>
-                <div className="text-sm opacity-70">Add Mapbox token to enable interactive map</div>
-              </div>
+            <div className="card overflow-hidden h-[420px] bg-[var(--muted)]/40">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://images.unsplash.com/photo-1496568816309-51d7c20e1fd5?q=80&w=1600&auto=format&fit=crop"
+                alt="Map placeholder"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
           <div>
             <div className="grid gap-4 max-h-[420px] overflow-auto pr-2">
-              {filtered.map((a) => (
+              {filtered.map((a, idx) => (
                 <Link key={a.id} href={`/agents/${a.slug}`} className="card p-4 flex items-center gap-4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={a.photo} alt={a.name} className="w-16 h-16 rounded-none object-cover bg-[var(--muted)]" />
+                  <img src={(a.photo && !a.photo.endsWith('.svg')) ? a.photo : STOCK[idx % STOCK.length]} alt={a.name} className="w-16 h-16 rounded-none object-cover bg-[var(--muted)]" />
                   <div>
                     <div className="font-medium">{a.name}</div>
                     <div className="text-sm opacity-80">{a.title}</div>

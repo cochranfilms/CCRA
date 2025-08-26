@@ -17,18 +17,27 @@ export default async function FeaturedAreasPage() {
         </div>
       </Section>
 
-      <Section>
+      <Section variant="dark">
         <div className="container-wide">
-          <div className="rounded-none overflow-hidden bg-[var(--muted)]/40 h-80 flex items-center justify-center">
-            <div className="text-center">
-              <div className="font-medium mb-1">Featured Areas Map</div>
-              <div className="text-sm opacity-70">Add interactive Mapbox map here with polygons and markers</div>
-            </div>
-          </div>
+          <h2 className="text-2xl font-semibold mb-2">Where we specialize</h2>
+          <p className="opacity-90 max-w-3xl">North Fulton suburbs, intown luxury, and family-friendly communities across the metro.</p>
         </div>
       </Section>
 
       <Section>
+        <div className="container-wide">
+          <div className="rounded-none overflow-hidden bg-[var(--muted)]/40 h-80">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop"
+              alt="Areas map placeholder"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </Section>
+
+      <Section variant="light">
         <div className="container-wide">
           <h2 className="text-2xl font-semibold mb-4">Featured Communities</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">

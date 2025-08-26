@@ -55,7 +55,7 @@ export function Metrics({ items }: { items: MetricsItem[] }) {
 
 export function CTA({ title, subtitle, cta }: { title: string; subtitle?: string; cta?: ReactNode }) {
   return (
-    <div className="card p-8 md:p-10 flex items-center justify-between gap-6">
+    <div className="card p-8 md:p-10 flex items-center justify-between gap-6 text-[color:var(--brand-deep)]">
       <div>
         <h3 className="text-xl md:text-2xl font-semibold">{title}</h3>
         {subtitle && <p className="opacity-80 mt-1">{subtitle}</p>}

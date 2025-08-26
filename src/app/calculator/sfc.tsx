@@ -5,8 +5,10 @@ function formatCurrency(n: number) {
   return n.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 }
 
-export default function CalculatorClient() {
-  const [price, setPrice] = useState(750000);
+type Props = { initialPrice?: number };
+
+export default function CalculatorClient({ initialPrice = 750000 }: Props) {
+  const [price, setPrice] = useState(initialPrice);
   const [downPct, setDownPct] = useState(20);
   const [ratePct, setRatePct] = useState(6.75);
   const [years, setYears] = useState(30);
@@ -27,7 +29,7 @@ export default function CalculatorClient() {
 
   return (
     <div className="grid lg:grid-cols-3 gap-6">
-      <form className="card p-4 grid gap-3 lg:col-span-2">
+      <form className="card p-4 grid gap-3 lg:col-span-2 text-[color:var(--brand-deep)]">
         <label className="grid gap-1">
           <span className="text-sm opacity-80">Home Price</span>
           <input type="number" className="p-3 rounded-none bg-transparent border" value={price} onChange={(e) => setPrice(Number(e.target.value))} />
@@ -64,7 +66,7 @@ export default function CalculatorClient() {
         </div>
       </form>
 
-      <div className="card p-4">
+      <div className="card p-4 text-[color:var(--brand-deep)]">
         <div className="text-sm opacity-80 mb-2">Estimated Monthly Payment</div>
         <div className="text-3xl font-semibold">{formatCurrency(result.total)}</div>
         <div className="mt-4 grid gap-2 text-sm">

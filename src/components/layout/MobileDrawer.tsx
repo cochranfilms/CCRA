@@ -12,13 +12,13 @@ export default function MobileDrawer({ items }: Props) {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
   const contact = items.find((i) => i.label === 'Contact');
-  const search = items.find((i) => i.label === 'Start Your Search');
-  const navItems = items.filter((i) => !['Contact', 'Start Your Search'].includes(i.label));
+  const blog = items.find((i) => i.label === 'Blog');
+  const navItems = items.filter((i) => !['Contact', 'Blog', 'Start Your Search'].includes(i.label));
 
   return (
     <>
       <button
-        className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-none border border-[var(--brand-deep)] text-[color:var(--brand-deep)]"
+        className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-none border border-white text-white bg-[var(--brand-deep)]"
         aria-label="Open menu"
         onClick={() => setOpen(true)}
       >
@@ -75,13 +75,14 @@ export default function MobileDrawer({ items }: Props) {
               ))}
             </nav>
 
-            <div className="mt-auto pt-4 flex items-center gap-2">
+            <div className="mt-auto pt-4 grid grid-cols-2 gap-2">
               {contact && (
-                <Link href={contact.href || '/book'} className="btn-primary flex-1 text-center">{contact.label}</Link>
+                <Link href={contact.href || '/#contact'} className="btn-primary text-center">{contact.label}</Link>
               )}
-              {search && (
-                <Link href={search.href || '/listings'} className="btn-gold flex-1 text-center">{search.label}</Link>
+              {blog && (
+                <Link href={blog.href || '/blog'} className="btn-outline text-center">{blog.label}</Link>
               )}
+              {/* Removed Start Your Search CTA per new IA */}
             </div>
           </aside>
         </div>

@@ -13,35 +13,47 @@ export type NavItem = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
+  // Buy
   {
-    label: 'Owner Services',
+    label: 'Buy',
+    href: '/buy',
     children: [
-      { label: 'Property Management', href: '/resources', description: 'End-to-end service for single-family & multi-unit owners.' },
-      { label: 'Tenant Placement', href: '/resources', description: 'Marketing, screening, and lease execution.' },
-      { label: 'Portfolio Advisory', href: '/book', description: 'Optimize returns with data-driven guidance.' },
+      { label: 'Listings', href: '/listings', description: 'Search homes on the market now.' },
+      { label: 'Featured Areas', href: '/featured-areas', description: 'Explore popular areas we serve.' },
+      { label: 'Calculator', href: '/calculator', description: 'Estimate payments and affordability.' },
     ],
-    ctaHref: '/book',
-    ctaLabel: 'Book Now',
   },
+  // Rent
   {
-    label: 'Tenant Services',
+    label: 'Rent',
+    href: '/rent',
     children: [
-      { label: 'Pay Portal', href: '/resources', description: 'Pay rent, view ledger, and more.' },
-      { label: 'Maintenance Request', href: '/book', description: 'Submit and track service requests.' },
-      { label: 'Rental Application', href: '/book', description: 'Apply online in minutes.' },
+      { label: 'Available Rentals', href: '/listings?mode=rent' },
+      { label: 'Application', href: '/resources' },
+      { label: 'Maintenance', href: '/resources' },
     ],
-    ctaHref: '/book',
-    ctaLabel: 'Book Now',
   },
+  // Sell
   {
-    label: 'Listings',
-    href: '/listings',
+    label: 'Sell',
+    href: '/sell',
     children: [
-      { label: 'Active Listings', href: '/listings' },
-      { label: 'Luxury', href: '/listings?q=Luxury' },
+      { label: 'Home Valuation', href: '/sell' },
+      { label: 'Marketing Plan', href: '/resources' },
       { label: 'New Construction', href: '/listings?q=New%20Construction' },
     ],
   },
+  // Communities
+  {
+    label: 'Communities',
+    href: '/communities',
+    children: [
+      { label: 'Buckhead', href: '/communities/buckhead' },
+      { label: 'Alpharetta', href: '/communities/alpharetta' },
+      { label: 'Midtown', href: '/communities/midtown' },
+    ],
+  },
+  // Featured Areas
   {
     label: 'Featured Areas',
     href: '/featured-areas',
@@ -52,26 +64,20 @@ export const NAV_ITEMS: NavItem[] = [
       { label: 'Gwinnett County', href: '/featured-areas' },
     ],
   },
+  // Agents
   {
-    label: 'Communities',
-    href: '/communities',
+    label: 'Agents',
+    href: '/agents',
     children: [
-      { label: 'Buckhead', href: '/communities/buckhead' },
-      { label: 'Alpharetta', href: '/communities/alpharetta' },
-      { label: 'Midtown', href: '/communities/midtown' },
+      { label: 'Meet our Team', href: '/agents' },
+      { label: 'Find an Agent', href: '/find-an-agent' },
+      { label: 'Join as an Agent', href: '/agents/join' },
     ],
   },
-  {
-    label: 'Resources',
-    href: '/resources',
-    children: [
-      { label: 'Guides & FAQs', href: '/resources' },
-      { label: 'Calculator', href: '/calculator' },
-    ],
-  },
-  { label: 'Calculator', href: '/calculator' },
-  { label: 'Contact', href: '/book' },
-  { label: 'Start Your Search', href: '/listings' },
+  // Contact CTA (scrolls to home contact section)
+  { label: 'Contact', href: '/#contact' },
+  // Blog
+  { label: 'Blog', href: '/blog' },
 ];
 
 
