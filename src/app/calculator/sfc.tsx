@@ -66,14 +66,14 @@ export default function CalculatorClient({ initialPrice = 750000 }: Props) {
         </div>
       </form>
 
-      <div className="card p-4 text-[color:var(--brand-deep)]">
-        <div className="text-sm opacity-80 mb-2">Estimated Monthly Payment</div>
-        <div className="text-3xl font-semibold">{formatCurrency(result.total)}</div>
+      <div className="card p-4 text-[color:var(--brand-deep)] overflow-hidden">
+        <div className="text-sm opacity-80 mb-2 whitespace-nowrap overflow-hidden text-ellipsis">Estimated Monthly Payment</div>
+        <div className="text-3xl font-semibold whitespace-nowrap overflow-hidden text-ellipsis">{formatCurrency(result.total)}</div>
         <div className="mt-4 grid gap-2 text-sm">
-          <div className="flex justify-between"><span>Principal & Interest</span><span>{formatCurrency(result.mortgage)}</span></div>
-          <div className="flex justify-between"><span>Property Taxes</span><span>{formatCurrency(result.taxes)}</span></div>
-          <div className="flex justify-between"><span>Home Insurance</span><span>{formatCurrency(result.insurance)}</span></div>
-          <div className="flex justify-between"><span>HOA</span><span>{formatCurrency(hoa)}</span></div>
+          <div className="flex items-baseline justify-between gap-3"><span className="min-w-0 break-words">Principal & Interest</span><span className="text-right shrink-0 max-w-[40%] truncate">{formatCurrency(result.mortgage)}</span></div>
+          <div className="flex items-baseline justify-between gap-3"><span className="min-w-0 break-words">Property Taxes</span><span className="text-right shrink-0 max-w-[40%] truncate">{formatCurrency(result.taxes)}</span></div>
+          <div className="flex items-baseline justify-between gap-3"><span className="min-w-0 break-words">Home Insurance</span><span className="text-right shrink-0 max-w-[40%] truncate">{formatCurrency(result.insurance)}</span></div>
+          <div className="flex items-baseline justify-between gap-3"><span className="min-w-0 break-words">HOA</span><span className="text-right shrink-0 max-w-[40%] truncate">{formatCurrency(hoa)}</span></div>
         </div>
       </div>
     </div>
