@@ -29,8 +29,8 @@ export default async function FeaturedAreasPage() {
           <div className="rounded-none overflow-hidden bg-[var(--muted)]/40 h-80">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop"
-              alt="Areas map placeholder"
+              src="/featured-map.webp"
+              alt="Service areas map"
               className="w-full h-full object-cover"
             />
           </div>
