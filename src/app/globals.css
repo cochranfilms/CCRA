@@ -28,7 +28,10 @@
   --color-brand-accent: var(--brand-accent);
   --color-surface: var(--surface);
   --color-surface-contrast: var(--surface-contrast);
-  --font-sans: var(--font-geist-sans);
+  --font-title: var(--font-playfair);
+  --font-subheading: var(--font-montserrat);
+  --font-section: var(--font-lato);
+  --font-sans: var(--font-lato);
   --font-mono: var(--font-geist-mono);
 
   /* Radius and shadow */
@@ -54,7 +57,7 @@
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
 /* Section rhythm */
@@ -166,6 +169,16 @@ body {
 /* Typography weights */
 h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 a { font-weight: 500; }
+
+/* Font utilities per brand spec */
+.font-title { font-family: var(--font-title), serif; }
+.font-subheading { font-family: var(--font-subheading), sans-serif; }
+.font-section { font-family: var(--font-section), sans-serif; }
+
+/* Default mapping: Title, Subheading, Section Header */
+h1, .title { font-family: var(--font-title), serif; }
+h2, .subheading { font-family: var(--font-subheading), sans-serif; }
+.section h2, .section-header { font-family: var(--font-section), sans-serif; }
 
 /* Animations */
 @keyframes dropdownFade {
