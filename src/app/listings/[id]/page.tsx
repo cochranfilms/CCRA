@@ -1,4 +1,5 @@
 import { loadListings } from '@/lib/data';
+import { fetchLoftyListings } from '@/lib/lofty';
 // Layout helpers not used on the redesigned listing page
 import ShareButtons from '@/components/ui/ShareButtons';
 import ShowingForm from '@/components/ui/ShowingForm';
@@ -8,13 +9,16 @@ import Link from 'next/link';
 interface Props { params: Promise<{ id: string }> }
 
 export async function generateStaticParams() {
-  const listings = await loadListings();
+  const listings = (await fetchLoftyListings({ limit: 60 })) || (await loadListings());
   return listings.map((l) => ({ id: l.id }));
 }
 
 export default async function ListingDetail({ params }: Props) {
   const { id } = await params;
-  const listings = await loadListings();
+  let listings = await fetchLoftyListings({ limit: 60 });
+  if (!listings.length) {
+    listings = await loadListings();
+  }
   const listing = listings.find((l) => l.id === id || l.slug === id);
   if (!listing) return <div className="container-wide section">Listing not found.</div>;
 

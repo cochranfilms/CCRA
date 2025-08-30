@@ -25,6 +25,14 @@ Copy `.env.example` to `.env.local` and set keys:
 - `POSTMARK_API_KEY` or EmailJS keys
 - `NEXT_PUBLIC_BASE_URL`
 
+EmailJS public env vars (no secrets):
+
+```
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
+NEXT_PUBLIC_EMAILJS_TEMPLATE_BUYER=your_buyer_template_id
+NEXT_PUBLIC_EMAILJS_TEMPLATE_SELLER=your_seller_template_id
+```
+
 ### Lead/CRM Integration
 
 Leads post to `api/leads`, which normalizes payloads and forwards them to a pluggable CRM adapter. Currently a console adapter is used as a safe default for development.
@@ -41,7 +49,7 @@ NEXT_PUBLIC_BASE_URL=http://localhost:3000
 # Places API (optional; nearby uses fallback if unset)
 PLACES_API_KEY=your_key_here
 
-# EmailJS (to be wired into client forms if desired)
+# EmailJS legacy placeholders (replaced by public vars above)
 EMAILJS_SERVICE_ID=
 EMAILJS_TEMPLATE_ID=
 EMAILJS_PUBLIC_KEY=

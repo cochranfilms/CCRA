@@ -50,38 +50,62 @@ export default function NavDropdown({ id, open, items, ctaHref, ctaLabel, anchor
 
   if (!open) return null;
 
-  // Render items as a single vertical column for compact menus
-
   return (
     <div
       role="menu"
       id={id}
       aria-hidden={!open}
-      className={(anchorClassName || '') + ' z-50'}
+      className={(anchorClassName || '') + ' z-[60]'}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
+      {/* Premium Dropdown Panel */}
       <div
         ref={panelRef}
-        className="p-2 md:p-3 w-[min(90vw,280px)] animate-dropdown rounded-none shadow-[0_10px_30px_-10px_rgba(0,0,0,0.35)] bg-[var(--brand-deep)] text-white border border-white/10"
+        className="p-4 w-[min(90vw,320px)] animate-dropdown shadow-2xl shadow-black/20 bg-white/95 backdrop-blur-xl border border-white/20 overflow-hidden"
       >
-        <div className="flex flex-col gap-1 md:gap-2">
-          {items.map((child) => (
+        {/* Decorative Header */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-400 to-red-400"></div>
+        
+        {/* Content Container */}
+        <div className="flex flex-col gap-2 pt-2">
+          {items.map((child, index) => (
             <Link
               key={child.label}
               href={child.href}
-              className="block px-3 py-2 rounded-none hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+              className="group relative px-4 py-3 hover:bg-gradient-to-r hover:from-slate-50 hover:to-slate-100 transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2"
             >
-              <div className="font-medium text-white">{child.label}</div>
-              {child.description && (
-                <div className="text-xs md:text-sm text-white/80 line-clamp-2">{child.description}</div>
-              )}
+              {/* Hover Background Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-50 to-orange-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="font-semibold text-slate-800 group-hover:text-slate-900 transition-colors duration-300">
+                  {child.label}
+                </div>
+                {child.description && (
+                  <div className="text-sm text-slate-600 group-hover:text-slate-700 mt-1 line-clamp-2 transition-colors duration-300">
+                    {child.description}
+                  </div>
+                )}
+              </div>
+              
+              {/* Subtle border on hover */}
+              <div className="absolute inset-0 border border-transparent group-hover:border-amber-200/50 transition-all duration-300"></div>
             </Link>
           ))}
         </div>
+        
+        {/* Premium CTA Section */}
         {(ctaHref && ctaLabel) && (
-          <div className="mt-2 md:mt-3 flex justify-end">
-            <Link href={ctaHref} className="btn-gold">{ctaLabel}</Link>
+          <div className="mt-4 pt-4 border-t border-slate-200/50">
+            <Link 
+              href={ctaHref} 
+              className="relative w-full px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-center transition-all duration-300 ease-out hover:shadow-lg hover:shadow-amber-500/25 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 inline-flex items-center justify-center group overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <span className="relative z-10">{ctaLabel}</span>
+            </Link>
           </div>
         )}
       </div>

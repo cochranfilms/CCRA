@@ -28,9 +28,14 @@ const lato = Lato({
   weight: ["300","400","700","900"],
 });
 
+const isStaging = process.env.NEXT_PUBLIC_IS_STAGING === 'true' || process.env.VERCEL_ENV === 'preview';
+
 export const metadata: Metadata = {
   title: "Cross Creek Realty",
   description: "Premium real estate advisory across metro Atlanta.",
+  robots: isStaging
+    ? { index: false, follow: false, nocache: true }
+    : { index: true, follow: true },
 };
 
 export default function RootLayout({

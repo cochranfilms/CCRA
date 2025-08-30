@@ -41,6 +41,7 @@ export const NAV_ITEMS: NavItem[] = [
       { label: 'Home Valuation', href: '/sell' },
       { label: 'Marketing Plan', href: '/resources' },
       { label: 'New Construction', href: '/listings?q=New%20Construction' },
+      { label: 'Talk to a Seller Advisor', href: '/?role=Seller#contact', description: 'Open the Seller contact form.' },
     ],
   },
   // Communities

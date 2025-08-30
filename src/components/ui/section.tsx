@@ -5,15 +5,16 @@ interface SectionProps {
   className?: string;
   variant?: 'light' | 'dark';
   contained?: boolean;
+  id?: string;
 }
 
-export function Section({ children, className = '', variant = 'light', contained = true }: SectionProps) {
+export function Section({ children, className = '', variant = 'light', contained = true, id }: SectionProps) {
   const variantClasses = variant === 'dark'
     ? 'bg-[var(--brand-deep)] text-white'
     : 'bg-[var(--bg)] text-[var(--fg)]';
   const containerClass = contained ? 'container-wide' : '';
   return (
-    <section className={`section ${variantClasses} ${className}`}>
+    <section id={id} className={`section ${variantClasses} ${className}`}>
       <div className={containerClass}>{children}</div>
     </section>
   );

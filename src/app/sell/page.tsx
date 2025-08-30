@@ -11,7 +11,7 @@ export default function SellPage() {
           <h1 className="text-3xl md:text-4xl font-semibold mb-6">Sell for Maximum Value</h1>
           <p className="mb-6 max-w-2xl">Concierge prep, luxury marketing, and negotiation expertise to deliver standout results.</p>
           <div className="flex gap-3">
-            <Link href="/#contact" className="btn-primary">Request a Consultation</Link>
+            <Link href="/?role=Seller#contact" className="btn-primary">Request a Consultation</Link>
             <Link href="/calculator" className="btn-outline">Payment Calculator</Link>
           </div>
         </div>
@@ -29,7 +29,7 @@ export default function SellPage() {
       <Section variant="light">
         <div className="container-wide">
           <h2 className="text-2xl font-semibold mb-4">Ready to get started?</h2>
-          <Link href="/#contact" className="btn-outline">Talk to an Advisor</Link>
+          <Link href="/?role=Seller#contact" className="btn-outline">Talk to an Advisor</Link>
         </div>
       </Section>
     </>

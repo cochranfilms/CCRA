@@ -1,8 +1,14 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { z } from 'zod';
+import emailjs from '@emailjs/browser';
 
 export default function ContactForm() {
+  // EmailJS configuration (hard-coded service and templates)
+  const SERVICE_ID = 'service_onh65w5';
+  const TEMPLATE_BUYER = 'template_nady0sm';
+  const TEMPLATE_SELLER = 'template_38ynpx7';
+
   const [role, setRole] = useState<'Buyer' | 'Seller'>('Buyer');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pending, setPending] = useState(false);
@@ -16,6 +22,27 @@ export default function ContactForm() {
       if (v) entries[k] = v;
     });
     setUtm(entries);
+  }, []);
+
+  // Initialize role from URL and set up EmailJS public key
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlRole = params.get('role');
+    const hash = window.location.hash || '';
+    if (urlRole === 'Seller' || /seller/i.test(hash)) {
+      setRole('Seller');
+    } else if (urlRole === 'Buyer' || /buyer/i.test(hash)) {
+      setRole('Buyer');
+    }
+
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      try {
+        emailjs.init({ publicKey });
+      } catch {
+        // no-op if already initialized or key missing
+      }
+    }
   }, []);
 
   const baseSchema = z.object({
@@ -47,8 +74,24 @@ export default function ContactForm() {
       return;
     }
 
-    const body = { ...parsed.data, source: 'ContactForm', ...utm };
-    await fetch('/api/leads', { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } });
+    const body = { ...parsed.data, source: 'ContactForm', ...utm } as Record<string, unknown>;
+
+    // Send to backend CRM endpoint
+    await fetch('/api/leads', { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } }).catch(() => void 0);
+
+    // Attempt EmailJS send (non-blocking if env not configured yet)
+    try {
+      const templateId = role === 'Buyer' ? TEMPLATE_BUYER : TEMPLATE_SELLER;
+      const hasEmailConfig = !!process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+      if (hasEmailConfig) {
+        const params: Record<string, string> = {};
+        Object.entries(body).forEach(([k, v]) => { if (v != null) params[k] = String(v); });
+        params.page_url = window.location.href;
+        await emailjs.send(SERVICE_ID, templateId, params);
+      }
+    } catch {
+      // ignore email errors to avoid blocking UX
+    }
     window.location.href = '/thank-you';
   }
 
@@ -56,6 +99,7 @@ export default function ContactForm() {
     <div className="card p-6">
       <div className="flex gap-2 mb-4">
         <button
+          type="button"
           onClick={() => setRole('Buyer')}
           className={`px-4 py-2 border ${role==='Buyer' ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold' : 'btn-outline'}`}
           aria-pressed={role==='Buyer'}
@@ -63,6 +107,7 @@ export default function ContactForm() {
           Buyer
         </button>
         <button
+          type="button"
           onClick={() => setRole('Seller')}
           className={`px-4 py-2 border ${role==='Seller' ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold' : 'btn-outline'}`}
           aria-pressed={role==='Seller'}

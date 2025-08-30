@@ -7,13 +7,14 @@ import NavDropdown from '@/components/layout/NavDropdown';
 
 type Props = {
   items: NavItem[];
+  scrolled?: boolean;
 };
 
-export default function MainNav({ items }: Props) {
+export default function MainNav({ items, scrolled = false }: Props) {
   const pathname = usePathname();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Close menus on Escape or outside click
   useEffect(() => {
@@ -48,19 +49,19 @@ export default function MainNav({ items }: Props) {
 
   function onHover(idx: number | null) {
     if (hoverTimer.current) clearTimeout(hoverTimer.current);
-    hoverTimer.current = setTimeout(() => setOpenIndex(idx), 80); // hover intent ~80ms
+    setOpenIndex(idx);
   }
 
   function onLeave(idx: number) {
     if (hoverTimer.current) clearTimeout(hoverTimer.current);
     hoverTimer.current = setTimeout(() => {
       setOpenIndex((v) => (v === idx ? null : v));
-    }, 80);
+    }, 120);
   }
 
   // Keyboard roving for top-level
   const buttonsRef = useRef<Array<HTMLButtonElement | null>>([]);
-  function onTopKeyDown(e: React.KeyboardEvent, idx: number, hasPanel: boolean) {
+  function onTopKeyDown(e: React.KeyboardEvent, idx: number, hasChildren: boolean) {
     const total = navItems.length;
     if (e.key === 'ArrowRight') {
       e.preventDefault();
@@ -71,7 +72,7 @@ export default function MainNav({ items }: Props) {
       const prev = (idx - 1 + total) % total;
       buttonsRef.current[prev]?.focus();
     } else if (e.key === 'ArrowDown') {
-      if (hasPanel) {
+      if (hasChildren) {
         e.preventDefault();
         setOpenIndex(idx);
       }
@@ -81,52 +82,81 @@ export default function MainNav({ items }: Props) {
   }
 
   return (
-    <nav role="navigation" aria-label="Primary" className="hidden md:flex items-center gap-3" ref={containerRef}>
+    <nav role="navigation" aria-label="Primary" className="hidden md:flex items-center gap-4" ref={containerRef}>
       <div className="flex-1" />
-      <ul className="flex items-center gap-2">
+      
+      {/* Premium Navigation Items */}
+      <ul className="flex items-center gap-1">
         {navItems.map((item, idx) => {
           const active = isActive(item.href);
           const hasChildren = !!item.children?.length;
           return (
-            <li key={item.label} className="relative" onMouseEnter={() => onHover(idx)} onMouseLeave={() => onLeave(idx)}>
+            <li key={item.label} className="relative z-[70]" onMouseEnter={() => onHover(idx)} onMouseLeave={() => onLeave(idx)}>
               {hasChildren ? (
                 <Link
                   href={item.href || '#'}
                   ref={(el) => { buttonsRef.current[idx] = el as unknown as HTMLButtonElement; }}
                   className={[
-                    'px-3 py-0 h-10 rounded-none border text-white bg-transparent transition whitespace-nowrap leading-none',
-                    'inline-flex items-center justify-center text-center w-[148px] text-[15px]',
-                    'hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]',
-                    'font-medium',
-                    active ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold' : 'border-white',
+                    'relative px-6 py-3 h-12 transition-all duration-300 ease-out whitespace-nowrap leading-none',
+                    'inline-flex items-center justify-center text-center text-[15px] font-medium tracking-wide',
+                    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent',
+                    'group overflow-hidden',
+                    active 
+                      ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/30 border border-amber-400/50' 
+                      : 'bg-white/10 hover:bg-white/20 text-white hover:text-white shadow-md hover:shadow-xl hover:shadow-white/10 border border-white/20 hover:border-white/40 backdrop-blur-sm'
                   ].join(' ')}
                   aria-haspopup="menu"
                   aria-expanded={openIndex === idx}
                   aria-controls={`menu-${idx}`}
                   aria-current={active ? 'page' : undefined}
+                  onClick={(e) => {
+                    // Toggle dropdown on click without navigating away
+                    e.preventDefault();
+                    setOpenIndex((v) => (v === idx ? null : idx));
+                  }}
                   onFocus={() => setOpenIndex(idx)}
                   onBlur={(e) => {
                     if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpenIndex(null);
                   }}
                   onKeyDown={(e) => onTopKeyDown(e as unknown as React.KeyboardEvent, idx, hasChildren)}
                 >
-                  {item.label}
+                  {/* Hover Background Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-orange-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Text with enhanced styling */}
+                  <span className="relative z-10 font-semibold">
+                    {item.label}
+                  </span>
+                  
+                  {/* Subtle glow effect */}
+                  <div className="absolute inset-0 transition-all duration-300 shadow-[0_0_20px_rgba(251,191,36,0.3)] opacity-0 group-hover:opacity-100"></div>
                 </Link>
               ) : (
                 <Link
                   href={item.href || '#'}
                   ref={(el) => { buttonsRef.current[idx] = el as unknown as HTMLButtonElement; }}
                   className={[
-                    'px-3 py-0 h-10 rounded-none border text-white bg-transparent transition whitespace-nowrap leading-none',
-                    'inline-flex items-center justify-center text-center w-[148px] text-[15px]',
-                    'hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]',
-                    'font-medium',
-                    active ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold' : 'border-white',
+                    'relative px-6 py-3 h-12 transition-all duration-300 ease-out whitespace-nowrap leading-none',
+                    'inline-flex items-center justify-center text-center text-[15px] font-medium tracking-wide',
+                    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent',
+                    'group overflow-hidden',
+                    active 
+                      ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/30 border border-amber-400/50' 
+                      : 'bg-white/10 hover:bg-white/20 text-white hover:text-white shadow-md hover:shadow-xl hover:shadow-white/10 border border-white/20 hover:border-white/40 backdrop-blur-sm'
                   ].join(' ')}
                   aria-current={active ? 'page' : undefined}
                   onKeyDown={(e) => onTopKeyDown(e as unknown as React.KeyboardEvent, idx, false)}
                 >
-                  {item.label}
+                  {/* Hover Background Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-orange-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Text with enhanced styling */}
+                  <span className="relative z-10 font-semibold">
+                    {item.label}
+                  </span>
+                  
+                  {/* Subtle glow effect */}
+                  <div className="absolute inset-0 transition-all duration-300 shadow-[0_0_20px_rgba(251,191,36,0.3)] opacity-0 group-hover:opacity-100"></div>
                 </Link>
               )}
 
@@ -135,22 +165,37 @@ export default function MainNav({ items }: Props) {
                   id={`menu-${idx}`}
                   open={openIndex === idx}
                   onClose={() => setOpenIndex(null)}
-                  anchorClassName="absolute left-0 mt-2"
+                  anchorClassName="absolute left-0 top-full mt-1 z-50"
                   items={item.children!}
                   ctaHref={item.ctaHref}
                   ctaLabel={item.ctaLabel}
+                  onMouseEnter={() => onHover(idx)}
+                  onMouseLeave={() => onLeave(idx)}
                 />
               )}
             </li>
           );
         })}
       </ul>
-      <div className="flex-1 flex items-center justify-end gap-2">
+      
+      {/* Premium CTA Buttons */}
+      <div className="flex-1 flex items-center justify-end gap-3">
         {primaryCtas.contact && (
-          <Link href={primaryCtas.contact.href || '/#contact'} className="btn-outline-inverse font-semibold h-10 px-4 py-0 inline-flex items-center justify-center">{primaryCtas.contact.label}</Link>
+          <Link 
+            href={primaryCtas.contact.href || '/#contact'} 
+            className="relative px-6 py-3 h-12 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold transition-all duration-300 ease-out hover:shadow-xl hover:shadow-amber-500/40 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 group overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <span className="relative z-10">{primaryCtas.contact.label}</span>
+          </Link>
         )}
         {primaryCtas.blog && (
-          <Link href={primaryCtas.blog.href || '/blog'} className="btn-outline-inverse font-semibold h-10 px-4 py-0 inline-flex items-center justify-center">{primaryCtas.blog.label}</Link>
+          <Link 
+            href={primaryCtas.blog.href || '/blog'} 
+            className="text-white font-semibold px-6 py-3 border border-white/30 hover:bg-white hover:text-slate-900 transition-all duration-300"
+          >
+            {primaryCtas.blog.label}
+          </Link>
         )}
       </div>
     </nav>

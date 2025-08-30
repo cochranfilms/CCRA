@@ -1,13 +1,17 @@
 import Link from 'next/link';
 import { Section } from '@/components/ui/section';
 import { loadListings } from '@/lib/data';
+import { fetchLoftyListings } from '@/lib/lofty';
 
 export const metadata = { title: 'Listings | Cross Creek Realty' };
 
 export default async function ListingsIndex({ searchParams }: { searchParams?: Promise<{ q?: string; mode?: string }> }) {
   const sp = (await searchParams) ?? {};
   const q = sp.q?.toLowerCase() ?? '';
-  const listings = await loadListings();
+  let listings = await fetchLoftyListings({ limit: 30, status: 'active' });
+  if (!listings.length) {
+    listings = await loadListings();
+  }
   const filtered = listings.filter((l) => !q || l.address.toLowerCase().includes(q) || l.communitySlug.toLowerCase().includes(q));
   const STOCK: string[] = [
     'https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=1600&auto=format&fit=crop',
