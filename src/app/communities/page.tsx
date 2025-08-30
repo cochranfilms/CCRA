@@ -18,7 +18,7 @@ export default async function CommunitiesPage() {
           <div className="container-wide py-20 md:py-32">
             <div className="max-w-4xl">
               <div className="inline-block px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold tracking-wider mb-6">
-                ATLANTA'S FINEST COMMUNITIES
+                ATLANTA&apos;S FINEST COMMUNITIES
               </div>
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
                 Discover Your Perfect
@@ -27,7 +27,7 @@ export default async function CommunitiesPage() {
                 </span>
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl leading-relaxed">
-                From luxury high-rises in Buckhead to family-friendly communities in North Fulton, explore Atlanta's most desirable areas with insider knowledge and market expertise.
+                From luxury high-rises in Buckhead to family-friendly communities in North Fulton, explore Atlanta&apos;s most desirable areas with insider knowledge and market expertise.
               </p>
               
               {/* Premium CTA Section */}
@@ -94,7 +94,7 @@ export default async function CommunitiesPage() {
               </div>
               <h3 className="text-3xl font-bold text-slate-900 mb-6">Top-Rated Schools</h3>
               <p className="text-slate-600 leading-relaxed text-lg max-w-sm mx-auto">
-                Access to Atlanta's finest public and private schools, with detailed ratings and performance data for informed family decisions.
+                Access to Atlanta&apos;s finest public and private schools, with detailed ratings and performance data for informed family decisions.
               </p>
             </div>
 
@@ -104,7 +104,7 @@ export default async function CommunitiesPage() {
               </div>
               <h3 className="text-3xl font-bold text-slate-900 mb-6">Prime Location</h3>
               <p className="text-slate-600 leading-relaxed text-lg max-w-sm mx-auto">
-                Strategic positioning with easy access to major highways, MARTA stations, and Atlanta's business and entertainment districts.
+                Strategic positioning with easy access to major highways, MARTA stations, and Atlanta&apos;s business and entertainment districts.
               </p>
             </div>
 
@@ -129,7 +129,7 @@ export default async function CommunitiesPage() {
               Featured Communities
             </h2>
             <p className="text-xl text-white/80 max-w-3xl mx-auto">
-              Explore Atlanta's most desirable neighborhoods with comprehensive insights, market data, and lifestyle information.
+              Explore Atlanta&apos;s most desirable neighborhoods with comprehensive insights, market data, and lifestyle information.
             </p>
           </div>
 
@@ -180,7 +180,7 @@ export default async function CommunitiesPage() {
                     }`}></div>
                     <span className="text-white/70 text-sm">
                       {c.stats.dom < 30 ? 'High Demand' : 
-                       c.stats.dom < 60 ? 'Moderate Activity' : "Buyer's Market"}
+                       c.stats.dom < 60 ? 'Moderate Activity' : 'Buyer\'s Market'}
                     </span>
                   </div>
 
@@ -215,7 +215,7 @@ export default async function CommunitiesPage() {
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-4">Culinary Scene</h3>
               <p className="text-slate-600 leading-relaxed">
-                From James Beard award-winning restaurants to innovative food halls, Atlanta's dining scene rivals any major city.
+                From James Beard award-winning restaurants to innovative food halls, Atlanta&apos;s dining scene rivals any major city.
               </p>
             </div>
 

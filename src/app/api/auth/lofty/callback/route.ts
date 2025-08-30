@@ -1,5 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+type TokenResponse = {
+  access_token: string;
+  refresh_token?: string;
+  expires_in?: number;
+  token_type?: string;
+  scope?: string;
+  // Allow arbitrary extra fields from the provider
+  [key: string]: unknown;
+};
+
+function isTokenResponse(value: unknown): value is TokenResponse {
+  if (typeof value !== 'object' || value === null) return false;
+  const obj = value as Record<string, unknown>;
+  return typeof obj.access_token === 'string';
+}
+
 export async function GET(req: NextRequest) {
   const tokenUrl = process.env.LOFTY_OAUTH_TOKEN_URL;
   const clientId = process.env.LOFTY_CLIENT_ID;
@@ -30,10 +46,11 @@ export async function GET(req: NextRequest) {
     cache: 'no-store',
   });
 
-  const json = await resp.json().catch(() => null) as any;
-  if (!resp.ok || !json?.access_token) {
-    return NextResponse.json({ error: 'Token exchange failed', details: json }, { status: 500 });
+  const parsed: unknown = await resp.json().catch(() => null);
+  if (!resp.ok || !isTokenResponse(parsed)) {
+    return NextResponse.json({ error: 'Token exchange failed', details: parsed }, { status: 500 });
   }
+  const json = parsed; // narrowed to TokenResponse
 
   const res = NextResponse.redirect(new URL('/', req.url));
   const cookieOptions = {

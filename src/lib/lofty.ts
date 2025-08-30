@@ -18,13 +18,26 @@ function coalesce<T>(...values: T[]): T | undefined {
   return undefined;
 }
 
+function get(obj: unknown, path: string[]): unknown {
+  let current: unknown = obj;
+  for (const key of path) {
+    if (typeof current !== 'object' || current === null) return undefined;
+    current = (current as Record<string, unknown>)[key];
+  }
+  return current;
+}
+
 function buildAddress(item: LoftyItem): string {
-  const parts = [
-    (item as any)?.address?.street || (item as Record<string, unknown>)?.address_line || (item as Record<string, unknown>)?.streetAddress,
-    (item as any)?.address?.city || (item as Record<string, unknown>)?.city,
-    (item as any)?.address?.state || (item as Record<string, unknown>)?.state || (item as Record<string, unknown>)?.stateOrProvince,
-    (item as any)?.address?.postalCode || (item as Record<string, unknown>)?.postalCode || (item as Record<string, unknown>)?.zip,
-  ].filter(Boolean);
+  const partsUnknown = [
+    get(item, ['address', 'street']) ?? (item as Record<string, unknown>).address_line ?? (item as Record<string, unknown>).streetAddress,
+    get(item, ['address', 'city']) ?? (item as Record<string, unknown>).city,
+    get(item, ['address', 'state']) ?? (item as Record<string, unknown>).state ?? (item as Record<string, unknown>).stateOrProvince,
+    get(item, ['address', 'postalCode']) ?? (item as Record<string, unknown>).postalCode ?? (item as Record<string, unknown>).zip,
+  ];
+  const parts = partsUnknown
+    .filter((v): v is string | number => typeof v === 'string' || typeof v === 'number')
+    .map((v) => String(v).trim())
+    .filter(Boolean);
   return parts.join(', ');
 }
 
@@ -35,8 +48,24 @@ function mapLoftyToListing(item: LoftyItem, index: number): Listing {
   const beds = toNumber(coalesce((item as Record<string, unknown>).bedrooms, (item as Record<string, unknown>).beds, (item as Record<string, unknown>).bedRooms), 0);
   const baths = toNumber(coalesce((item as Record<string, unknown>).bathrooms, (item as Record<string, unknown>).baths, (item as Record<string, unknown>).bathRooms, (item as Record<string, unknown>).bathrooms_total), 0);
   const sqft = toNumber(coalesce((item as Record<string, unknown>).sqft, (item as Record<string, unknown>).livingArea, (item as Record<string, unknown>).lot_size, (item as Record<string, unknown>).livingAreaValue), 0);
-  const lat = toNumber(coalesce((item as Record<string, unknown>).latitude, (item as Record<string, unknown>).lat, (item as any)?.location?.lat, (item as any)?.coordinates?.lat), 0);
-  const lng = toNumber(coalesce((item as Record<string, unknown>).longitude, (item as Record<string, unknown>).lng, (item as any)?.location?.lng, (item as any)?.coordinates?.lng), 0);
+  const lat = toNumber(
+    coalesce(
+      (item as Record<string, unknown>).latitude,
+      (item as Record<string, unknown>).lat,
+      get(item, ['location', 'lat']),
+      get(item, ['coordinates', 'lat'])
+    ),
+    0
+  );
+  const lng = toNumber(
+    coalesce(
+      (item as Record<string, unknown>).longitude,
+      (item as Record<string, unknown>).lng,
+      get(item, ['location', 'lng']),
+      get(item, ['coordinates', 'lng'])
+    ),
+    0
+  );
   const photosSource = coalesce<unknown[]>((item as Record<string, unknown>).photos as unknown[], (item as Record<string, unknown>).images as unknown[], (item as Record<string, unknown>).media as unknown[]) || [];
   const photos: string[] = photosSource
     .map((p: unknown) => {

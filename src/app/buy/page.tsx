@@ -19,7 +19,7 @@ export default function BuyPage() {
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
                 Find Your Dream Home
                 <span className="block text-4xl md:text-5xl font-light text-amber-400 mt-2">
-                  in Atlanta's Finest Neighborhoods
+                  in Atlanta&apos;s Finest Neighborhoods
                 </span>
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl leading-relaxed">
@@ -293,7 +293,7 @@ export default function BuyPage() {
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-4">Featured Areas</h3>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                Explore Atlanta's most desirable neighborhoods with detailed insights and market data.
+                Explore Atlanta&apos;s most desirable neighborhoods with detailed insights and market data.
               </p>
               <Link 
                 href="/featured-areas" 
@@ -310,7 +310,7 @@ export default function BuyPage() {
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-4">Buyer Checklist</h3>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                Comprehensive checklist to ensure you're prepared for every step of the buying process.
+                Comprehensive checklist to ensure you&apos;re prepared for every step of the buying process.
               </p>
               <Link 
                 href="/#contact" 
@@ -348,7 +348,7 @@ export default function BuyPage() {
               Ready to Find Your Dream Home?
             </h2>
             <p className="text-xl text-white/80 mb-12 leading-relaxed">
-              Join hundreds of satisfied buyers who trusted Cross Creek Realty to guide them through one of life's most important decisions.
+              Join hundreds of satisfied buyers who trusted Cross Creek Realty to guide them through one of life&apos;s most important decisions.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -368,7 +368,7 @@ export default function BuyPage() {
             </div>
 
             <div className="mt-12 pt-12 border-t border-white/20">
-              <p className="text-white/60 text-sm mb-4">Trusted by Atlanta's most discerning buyers</p>
+              <p className="text-white/60 text-sm mb-4">Trusted by Atlanta&apos;s most discerning buyers</p>
               <div className="flex justify-center items-center gap-8 opacity-60">
                 <div className="text-white/40 text-xs">🏆 TOP PRODUCER 2024</div>
                 <div className="text-white/40 text-xs">⭐ 5-STAR RATING</div>

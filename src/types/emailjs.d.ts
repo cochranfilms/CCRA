@@ -3,7 +3,7 @@ declare module '@emailjs/browser' {
   export function send(
     serviceId: string,
     templateId: string,
-    params?: Record<string, any>,
+    params?: Record<string, string | number | boolean | null | undefined>,
     publicKeyOrOptions?: string | { publicKey: string }
   ): Promise<{ status: number; text: string }>;
   const _default: { init: typeof init; send: typeof send };
