@@ -12,9 +12,9 @@ export default async function CommunitiesPage() {
     <>
       {/* Hero Section - Million Dollar Design */}
       <Section variant="dark" contained={false} className="relative overflow-hidden !py-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
+        {/* Background Video */}
         <video
-          className="absolute inset-0 w-full h-full object-cover -z-10 pointer-events-none opacity-40"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-40"
           src="/realty.mp4"
           autoPlay
           muted
@@ -22,6 +22,8 @@ export default async function CommunitiesPage() {
           playsInline
           preload="auto"
         />
+        {/* Tint Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-800/80 to-slate-900/80 pointer-events-none"></div>
         <div className="relative z-10">
           <div className="container-wide py-12 md:py-20">
             <div className="max-w-4xl">
