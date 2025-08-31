@@ -14,6 +14,7 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pending, setPending] = useState(false);
   const [utm, setUtm] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -96,12 +97,18 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="card p-6">
-      <div className="flex gap-2 mb-4">
+    <div className="card p-6 md:p-8 bg-white/95 backdrop-blur-sm border border-slate-200">
+      {/* Buyer/Seller Toggle */}
+      <div className="flex items-center gap-2 mb-6">
         <button
           type="button"
           onClick={() => setRole('Buyer')}
-          className={`px-4 py-2 border ${role==='Buyer' ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold' : 'btn-outline'}`}
+          className={[
+            'px-5 py-2 h-10 inline-flex items-center justify-center border transition-colors',
+            role==='Buyer'
+              ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold'
+              : 'bg-white text-slate-800 border-slate-300 hover:bg-slate-50'
+          ].join(' ')}
           aria-pressed={role==='Buyer'}
         >
           Buyer
@@ -109,35 +116,124 @@ export default function ContactForm() {
         <button
           type="button"
           onClick={() => setRole('Seller')}
-          className={`px-4 py-2 border ${role==='Seller' ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold' : 'btn-outline'}`}
+          className={[
+            'px-5 py-2 h-10 inline-flex items-center justify-center border transition-colors',
+            role==='Seller'
+              ? 'bg-[var(--brand-primary)] text-[color:var(--brand-deep)] border-[var(--brand-primary)] font-semibold'
+              : 'bg-white text-slate-800 border-slate-300 hover:bg-slate-50'
+          ].join(' ')}
           aria-pressed={role==='Seller'}
         >
           Seller
         </button>
       </div>
       <form action={onSubmit} className="grid md:grid-cols-2 gap-4">
-        <input name="zip" placeholder="ZIP / Neighborhood" className="p-3 rounded-none bg-transparent border" />
-        <input name="timeline" placeholder="Timeline (e.g., 0-3 months)" className="p-3 rounded-none bg-transparent border" />
-        <input name="budget" placeholder={role==='Buyer' ? 'Budget' : 'Price Point'} className="p-3 rounded-none bg-transparent border md:col-span-2" />
-        <input name="name" placeholder="Full Name" className="p-3 rounded-none bg-transparent border" />
-        <input name="email" placeholder="Email" className="p-3 rounded-none bg-transparent border" />
-        <input name="phone" placeholder="Phone" className="p-3 rounded-none bg-transparent border" />
+        <label className="grid gap-1">
+          <span className="text-sm text-slate-700">ZIP / Neighborhood<span className="text-[var(--brand-primary)]"> *</span></span>
+          <input
+            name="zip"
+            placeholder="ZIP / Neighborhood"
+            required
+            aria-invalid={!!errors.zip}
+            onBlur={() => setTouched((t) => ({ ...t, zip: true }))}
+            className={`p-3 rounded-none bg-transparent border ${errors.zip && touched.zip ? 'border-red-500' : 'border-slate-300'} focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]`}
+          />
+          {errors.zip && touched.zip && <span className="text-xs text-red-600" role="alert">{errors.zip}</span>}
+        </label>
+        <label className="grid gap-1">
+          <span className="text-sm text-slate-700">Timeline<span className="text-[var(--brand-primary)]"> *</span></span>
+          <input
+            name="timeline"
+            placeholder="Timeline (e.g., 0-3 months)"
+            required
+            aria-invalid={!!errors.timeline}
+            onBlur={() => setTouched((t) => ({ ...t, timeline: true }))}
+            className={`p-3 rounded-none bg-transparent border ${errors.timeline && touched.timeline ? 'border-red-500' : 'border-slate-300'} focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]`}
+          />
+          {errors.timeline && touched.timeline && <span className="text-xs text-red-600" role="alert">{errors.timeline}</span>}
+        </label>
+        <label className="grid gap-1 md:col-span-2">
+          <span className="text-sm text-slate-700">{role==='Buyer' ? 'Budget' : 'Price Point'}<span className="text-[var(--brand-primary)]"> *</span></span>
+          <input
+            name="budget"
+            placeholder={role==='Buyer' ? 'Budget' : 'Price Point'}
+            required
+            aria-invalid={!!errors.budget}
+            onBlur={() => setTouched((t) => ({ ...t, budget: true }))}
+            className={`p-3 rounded-none bg-transparent border ${errors.budget && touched.budget ? 'border-red-500' : 'border-slate-300'} focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]`}
+          />
+          {errors.budget && touched.budget && <span className="text-xs text-red-600" role="alert">{errors.budget}</span>}
+        </label>
+        <label className="grid gap-1">
+          <span className="text-sm text-slate-700">Full Name<span className="text-[var(--brand-primary)]"> *</span></span>
+          <input
+            name="name"
+            placeholder="Full Name"
+            required
+            aria-invalid={!!errors.name}
+            onBlur={() => setTouched((t) => ({ ...t, name: true }))}
+            className={`p-3 rounded-none bg-transparent border ${errors.name && touched.name ? 'border-red-500' : 'border-slate-300'} focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]`}
+          />
+          {errors.name && touched.name && <span className="text-xs text-red-600" role="alert">{errors.name}</span>}
+        </label>
+        <label className="grid gap-1">
+          <span className="text-sm text-slate-700">Email<span className="text-[var(--brand-primary)]"> *</span></span>
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            required
+            aria-invalid={!!errors.email}
+            onBlur={() => setTouched((t) => ({ ...t, email: true }))}
+            className={`p-3 rounded-none bg-transparent border ${errors.email && touched.email ? 'border-red-500' : 'border-slate-300'} focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]`}
+          />
+          {errors.email && touched.email && <span className="text-xs text-red-600" role="alert">{errors.email}</span>}
+        </label>
+        <label className="grid gap-1 md:col-span-2">
+          <span className="text-sm text-slate-700">Phone<span className="text-[var(--brand-primary)]"> *</span></span>
+          <input
+            name="phone"
+            type="tel"
+            placeholder="Phone"
+            required
+            aria-invalid={!!errors.phone}
+            onBlur={() => setTouched((t) => ({ ...t, phone: true }))}
+            className={`p-3 rounded-none bg-transparent border ${errors.phone && touched.phone ? 'border-red-500' : 'border-slate-300'} focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]`}
+          />
+          {errors.phone && touched.phone && <span className="text-xs text-red-600" role="alert">{errors.phone}</span>}
+        </label>
         {role === 'Buyer' ? (
-          <textarea name="preferences" placeholder="Property preferences (beds/baths/sqft/notes)" className="p-3 rounded-none bg-transparent border md:col-span-2" />
+          <label className="grid gap-1 md:col-span-2">
+            <span className="text-sm text-slate-700">Property preferences</span>
+            <textarea
+              name="preferences"
+              placeholder="Property preferences (beds/baths/sqft/notes)"
+              className="p-3 rounded-none bg-transparent border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+              rows={4}
+            />
+          </label>
         ) : (
-          <textarea name="property" placeholder="Property details (beds/baths/sqft/notes)" className="p-3 rounded-none bg-transparent border md:col-span-2" />
+          <label className="grid gap-1 md:col-span-2">
+            <span className="text-sm text-slate-700">Property details</span>
+            <textarea
+              name="property"
+              placeholder="Property details (beds/baths/sqft/notes)"
+              className="p-3 rounded-none bg-transparent border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+              rows={4}
+            />
+          </label>
         )}
         <label className="md:col-span-2 flex items-center gap-2 text-sm">
-          <input type="checkbox" name="consent" /> I agree to be contacted about my inquiry.
+          <input type="checkbox" name="consent" required aria-invalid={!!errors.consent} />
+          <span>I agree to be contacted about my inquiry.<span className="text-[var(--brand-primary)]"> *</span></span>
         </label>
-        <div className="text-sm text-red-600 md:col-span-2">
-          {Object.values(errors).slice(0,1)}
-        </div>
         {/* Hidden UTM fields for future CRM mapping */}
         {Object.entries(utm).map(([k,v]) => (
           <input key={k} name={k} defaultValue={v} className="hidden" readOnly />
         ))}
-        <button disabled={pending} className="btn-primary md:col-span-2">{pending ? 'Submitting…' : 'Submit'}</button>
+        <button disabled={pending} className="md:col-span-2 relative px-6 py-3 h-12 bg-[var(--brand-deep)] text-white font-semibold transition-all duration-300 ease-out hover:shadow-xl hover:shadow-[var(--brand-deep)]/20 hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] focus:ring-offset-2">
+          {pending ? 'Submitting…' : 'Submit'}
+        </button>
       </form>
     </div>
   );
