@@ -7,11 +7,11 @@ export default function BuyPage() {
   return (
     <>
       {/* Hero Section - Million Dollar Design */}
-      <Section variant="dark" className="relative overflow-hidden">
+      <Section variant="dark" contained={false} className="relative overflow-hidden !py-0">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
-        <div className="absolute inset-0 bg-[url('/featured-map.jpg')] bg-cover bg-center opacity-20"></div>
+        <div className="absolute inset-0 bg-[url('/featured-map.jpg')] bg-center bg-no-repeat md:bg-cover opacity-20"></div>
         <div className="relative z-10">
-          <div className="container-wide py-20 md:py-32">
+          <div className="container-wide py-12 md:py-20">
             <div className="max-w-4xl">
               <div className="inline-block px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold tracking-wider mb-6">
                 PREMIUM HOME BUYING
@@ -27,7 +27,7 @@ export default function BuyPage() {
               </p>
               
               {/* Premium CTA Section */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-16">
+              <div className="flex flex-col sm:flex-row gap-4 mb-10 md:mb-12">
                 <Link 
                   href="/listings" 
                   className="relative px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg tracking-wide transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/30 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-amber-400 focus:ring-offset-4 group overflow-hidden"
@@ -44,7 +44,7 @@ export default function BuyPage() {
               </div>
 
               {/* Premium Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-8 border-t border-white/20">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-6 md:pt-8 border-t border-white/20">
                 <div className="text-center">
                   <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">500+</div>
                   <div className="text-white/80 text-sm font-medium">HOMES SOLD</div>
