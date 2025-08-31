@@ -103,15 +103,17 @@ function mapLoftyToListing(item: LoftyItem, index: number): Listing {
 }
 
 export async function fetchLoftyListings(params?: Record<string, string | number>): Promise<Listing[]> {
-  const base = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  const url = new URL('/api/lofty', base);
+  // Build a relative internal URL so Next can cache it properly in app router
+  const search = new URLSearchParams();
   if (params) {
     for (const [k, v] of Object.entries(params)) {
-      url.searchParams.set(k, String(v));
+      search.set(k, String(v));
     }
   }
+  const path = `/api/lofty${search.size ? `?${search.toString()}` : ''}`;
   try {
-    const res = await fetch(url.toString(), { cache: 'no-store' });
+    // Use ISR by default to avoid static-to-dynamic shifts in app router
+    const res = await fetch(path, { next: { revalidate: 300 } });
     if (!res.ok) return [];
     const json: unknown = await res.json().catch(() => undefined);
     const itemsArray = (val: unknown): unknown[] | null => (Array.isArray(val) ? val : null);

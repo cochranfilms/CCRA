@@ -8,6 +8,8 @@ import Link from 'next/link';
 
 interface Props { params: Promise<{ id: string }> }
 
+export const revalidate = 300;
+
 export async function generateStaticParams() {
   const listings = (await fetchLoftyListings({ limit: 60 })) || (await loadListings());
   return listings.map((l) => ({ id: l.id }));
@@ -240,10 +242,8 @@ interface NearbyPlace {
 }
 
 async function fetchNearby(lat: number, lng: number, cat: string): Promise<NearbyPlace[]> {
-  const base = process.env.NEXT_PUBLIC_BASE_URL;
-  if (!base) return [] as NearbyPlace[];
   try {
-    const res = await fetch(`${base}/api/nearby?lat=${lat}&lng=${lng}&cat=${cat}`, { next: { revalidate: 300 } });
+    const res = await fetch(`/api/nearby?lat=${lat}&lng=${lng}&cat=${cat}`, { next: { revalidate: 300 } });
     if (!res.ok) return [] as NearbyPlace[];
     return res.json();
   } catch {

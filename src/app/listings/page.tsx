@@ -4,6 +4,7 @@ import { loadListings } from '@/lib/data';
 import { fetchLoftyListings } from '@/lib/lofty';
 
 export const metadata = { title: 'Listings | Cross Creek Realty' };
+export const revalidate = 300;
 
 export default async function ListingsIndex({ searchParams }: { searchParams?: Promise<{ q?: string; mode?: string }> }) {
   const sp = (await searchParams) ?? {};
