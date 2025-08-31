@@ -76,7 +76,7 @@ export default function NavDropdown({ id, open, items, ctaHref, ctaLabel, anchor
               className="group relative px-4 py-3 hover:bg-gradient-to-r hover:from-slate-50 hover:to-slate-100 transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2"
             >
               {/* Hover Background Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-50 to-orange-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-50 to-orange-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               
               {/* Content */}
               <div className="relative z-10">
@@ -91,7 +91,7 @@ export default function NavDropdown({ id, open, items, ctaHref, ctaLabel, anchor
               </div>
               
               {/* Subtle border on hover */}
-              <div className="absolute inset-0 border border-transparent group-hover:border-amber-200/50 transition-all duration-300"></div>
+              <div className="absolute inset-0 border border-transparent group-hover:border-amber-200/50 transition-all duration-300 pointer-events-none"></div>
             </Link>
           ))}
         </div>

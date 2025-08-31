@@ -109,10 +109,9 @@ export default function MainNav({ items, scrolled = false }: Props) {
                   aria-expanded={openIndex === idx}
                   aria-controls={`menu-${idx}`}
                   aria-current={active ? 'page' : undefined}
-                  onClick={(e) => {
-                    // Toggle dropdown on click without navigating away
-                    e.preventDefault();
-                    setOpenIndex((v) => (v === idx ? null : idx));
+                  onClick={() => {
+                    // Navigate to the page and show dropdown
+                    setOpenIndex(idx);
                   }}
                   onFocus={() => setOpenIndex(idx)}
                   onBlur={(e) => {
@@ -121,7 +120,7 @@ export default function MainNav({ items, scrolled = false }: Props) {
                   onKeyDown={(e) => onTopKeyDown(e as unknown as React.KeyboardEvent, idx, hasChildren)}
                 >
                   {/* Hover Background Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-orange-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-orange-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                   
                   {/* Text with enhanced styling */}
                   <span className="relative z-10 font-semibold">
@@ -129,7 +128,7 @@ export default function MainNav({ items, scrolled = false }: Props) {
                   </span>
                   
                   {/* Subtle glow effect */}
-                  <div className="absolute inset-0 transition-all duration-300 shadow-[0_0_20px_rgba(251,191,36,0.3)] opacity-0 group-hover:opacity-100"></div>
+                  <div className="absolute inset-0 transition-all duration-300 shadow-[0_0_20px_rgba(251,191,36,0.3)] opacity-0 group-hover:opacity-100 pointer-events-none"></div>
                 </Link>
               ) : (
                 <Link
@@ -148,7 +147,7 @@ export default function MainNav({ items, scrolled = false }: Props) {
                   onKeyDown={(e) => onTopKeyDown(e as unknown as React.KeyboardEvent, idx, false)}
                 >
                   {/* Hover Background Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-orange-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-orange-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                   
                   {/* Text with enhanced styling */}
                   <span className="relative z-10 font-semibold">
@@ -156,7 +155,7 @@ export default function MainNav({ items, scrolled = false }: Props) {
                   </span>
                   
                   {/* Subtle glow effect */}
-                  <div className="absolute inset-0 transition-all duration-300 shadow-[0_0_20px_rgba(251,191,36,0.3)] opacity-0 group-hover:opacity-100"></div>
+                  <div className="absolute inset-0 transition-all duration-300 shadow-[0_0_20px_rgba(251,191,36,0.3)] opacity-0 group-hover:opacity-100 pointer-events-none"></div>
                 </Link>
               )}
 

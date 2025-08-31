@@ -79,13 +79,14 @@ export default function MobileDrawer({ items }: Props) {
                         <Link 
                           key={child.label} 
                           href={child.href} 
-                          className="block px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-amber-50 hover:to-orange-50 transition-all duration-300 ease-out group/item"
+                          className="block px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-amber-50 hover:to-orange-50 transition-all duration-300 ease-out group/item relative overflow-hidden"
                         >
-                          <div className="font-medium text-slate-700 group-hover/item:text-slate-900 transition-colors duration-300">
+                          <div className="absolute inset-0 pointer-events-none" />
+                          <div className="font-medium text-slate-700 group-hover/item:text-slate-900 transition-colors duration-300 relative z-10">
                             {child.label}
                           </div>
                           {child.description && (
-                            <div className="text-sm text-slate-500 group-hover/item:text-slate-600 mt-1 line-clamp-2 transition-colors duration-300">
+                            <div className="text-sm text-slate-500 group-hover/item:text-slate-600 mt-1 line-clamp-2 transition-colors duration-300 relative z-10">
                               {child.description}
                             </div>
                           )}

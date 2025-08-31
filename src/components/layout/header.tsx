@@ -18,7 +18,7 @@ export function Header() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-30 transition-all duration-500 ease-out bg-gradient-to-r from-slate-900/98 via-slate-800/98 to-slate-900/98 backdrop-blur-md ${
+    <header className={`sticky top-0 z-[100] transition-all duration-500 ease-out bg-gradient-to-r from-slate-900/98 via-slate-800/98 to-slate-900/98 backdrop-blur-md ${
       scrolled ? 'shadow-2xl shadow-black/20' : ''
     }`}>
       {/* Premium Utility Bar */}
