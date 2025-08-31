@@ -6,7 +6,17 @@ import ContactForm from '@/components/ContactForm';
 export default function Home() {
   return (
     <>
-      <section className="relative section" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2000&auto=format&fit=crop')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <section className="relative section overflow-hidden">
+        {/* Background Video */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover -z-10 pointer-events-none"
+          src="/Interior_real_estate.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
         <div className="absolute inset-0 bg-[var(--brand-deep)]/60 pointer-events-none" />
         <div className="relative container-wide">
           <div className="grid items-center md:grid-cols-2 gap-8 md:gap-12 text-white">
