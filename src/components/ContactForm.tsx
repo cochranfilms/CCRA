@@ -8,6 +8,7 @@ export default function ContactForm() {
   const SERVICE_ID = 'service_onh65w5';
   const TEMPLATE_BUYER = 'template_nady0sm';
   const TEMPLATE_SELLER = 'template_38ynpx7';
+  const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'wEnObaDmdJFEGMFq8';
 
   const [role, setRole] = useState<'Buyer' | 'Seller'>('Buyer');
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -35,13 +36,12 @@ export default function ContactForm() {
       setRole('Buyer');
     }
 
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-    if (publicKey) {
-      try {
-        emailjs.init({ publicKey });
-      } catch {
-        // no-op if already initialized or key missing
+    try {
+      if (EMAILJS_PUBLIC_KEY) {
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
       }
+    } catch {
+      // no-op if already initialized or key missing
     }
   }, []);
 
@@ -82,7 +82,7 @@ export default function ContactForm() {
     // Attempt EmailJS send (non-blocking if env not configured yet)
     try {
       const templateId = role === 'Buyer' ? TEMPLATE_BUYER : TEMPLATE_SELLER;
-      const hasEmailConfig = !!process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+      const hasEmailConfig = !!EMAILJS_PUBLIC_KEY;
       if (hasEmailConfig) {
         const params: Record<string, string> = {};
         Object.entries(body).forEach(([k, v]) => { if (v != null) params[k] = String(v); });
