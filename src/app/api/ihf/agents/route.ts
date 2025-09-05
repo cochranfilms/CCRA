@@ -12,18 +12,23 @@ function getIHFConfig() {
   const accountId = process.env.IHF_ACCOUNT_ID || process.env.IHOMEFINDER_ACCOUNT_ID || '';
   const headerSite = process.env.IHF_HEADER_SITE || process.env.IHOMEFINDER_HEADER_SITE || 'X-Site-Id';
   const headerAccount = process.env.IHF_HEADER_ACCOUNT || process.env.IHOMEFINDER_HEADER_ACCOUNT || 'X-Account-Id';
+  const siteIn = (process.env.IHF_SITE_IN || 'header').toLowerCase();
+  const accountIn = (process.env.IHF_ACCOUNT_IN || 'header').toLowerCase();
+  const siteParam = process.env.IHF_SITE_PARAM || 'siteId';
+  const accountParam = process.env.IHF_ACCOUNT_PARAM || 'accountId';
+  const debug = process.env.IHF_DEBUG === '1';
   if (!apiKey) {
     throw new Error('Missing IHF_API_KEY (or IHOMEFINDER_API_KEY)');
   }
   if (!baseUrl) {
     throw new Error('Missing IHF_BASE_URL (or IHOMEFINDER_BASE_URL)');
   }
-  return { apiKey, baseUrl, agentsPath, authHeader, authPrefix, authIn, authQueryKey, siteId, accountId, headerSite, headerAccount } as const;
+  return { apiKey, baseUrl, agentsPath, authHeader, authPrefix, authIn, authQueryKey, siteId, accountId, headerSite, headerAccount, siteIn, accountIn, siteParam, accountParam, debug } as const;
 }
 
 export async function GET(req: NextRequest) {
   try {
-    const { apiKey, baseUrl, agentsPath, authHeader, authPrefix, authIn, authQueryKey, siteId, accountId, headerSite, headerAccount } = getIHFConfig();
+    const { apiKey, baseUrl, agentsPath, authHeader, authPrefix, authIn, authQueryKey, siteId, accountId, headerSite, headerAccount, siteIn, accountIn, siteParam, accountParam, debug } = getIHFConfig();
     const incomingUrl = new URL(req.url);
     const url = new URL(agentsPath, baseUrl);
     incomingUrl.searchParams.forEach((value, key) => {
@@ -36,8 +41,12 @@ export async function GET(req: NextRequest) {
     } else if (authIn === 'query') {
       url.searchParams.set(authQueryKey, apiKey);
     }
-    if (siteId) headers[headerSite] = siteId;
-    if (accountId) headers[headerAccount] = accountId;
+    if (siteId) {
+      if (siteIn === 'header') headers[headerSite] = siteId; else url.searchParams.set(siteParam, siteId);
+    }
+    if (accountId) {
+      if (accountIn === 'header') headers[headerAccount] = accountId; else url.searchParams.set(accountParam, accountId);
+    }
 
     const upstream = await fetch(url.toString(), {
       headers,
@@ -47,7 +56,7 @@ export async function GET(req: NextRequest) {
     const contentType = upstream.headers.get('content-type') || 'application/json';
     const bodyText = await upstream.text();
     if (!upstream.ok) {
-      const payload = process.env.NODE_ENV === 'production'
+      const payload = (process.env.NODE_ENV === 'production' && !debug)
         ? { error: 'Upstream error', status: upstream.status }
         : { error: 'Upstream error', status: upstream.status, upstream: bodyText };
       return NextResponse.json(payload, { status: upstream.status || 502 });
