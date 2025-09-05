@@ -4,10 +4,8 @@ import Link from 'next/link';
 
 interface Props { params: Promise<{ slug: string }> }
 
-export async function generateStaticParams() {
-  const agents = await loadAgents();
-  return agents.map((a) => ({ slug: a.slug }));
-}
+// Disable static params to avoid build-time external API calls via iHomefinder
+export const dynamic = 'force-dynamic';
 
 export default async function AgentDetailPage({ params }: Props) {
   const { slug } = await params;

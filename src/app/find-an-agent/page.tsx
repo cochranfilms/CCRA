@@ -7,6 +7,9 @@ export const metadata = {
   title: 'Find an Agent | Cross Creek Realty',
 };
 
+// Render at request time to avoid long build-time external calls
+export const dynamic = 'force-dynamic';
+
 export default async function FindAgentPage({ searchParams }: { searchParams?: Promise<Record<string, string>> }) {
   const agents = await loadAgents();
   const sp = (await searchParams) ?? {};
