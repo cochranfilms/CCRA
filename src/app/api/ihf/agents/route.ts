@@ -48,10 +48,14 @@ export async function GET(req: NextRequest) {
       if (accountIn === 'header') headers[headerAccount] = accountId; else url.searchParams.set(accountParam, accountId);
     }
 
+    const controller = new AbortController();
+    const timeoutMs = Number(process.env.IHF_TIMEOUT_MS || 8000);
+    const t = setTimeout(() => controller.abort(), timeoutMs);
     const upstream = await fetch(url.toString(), {
       headers,
       cache: 'no-store',
-    });
+      signal: controller.signal,
+    }).finally(() => clearTimeout(t));
 
     const contentType = upstream.headers.get('content-type') || 'application/json';
     const bodyText = await upstream.text();

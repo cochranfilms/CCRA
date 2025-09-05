@@ -92,7 +92,10 @@ export async function fetchIHFListings(params?: Record<string, string | number>)
   }
   const path = `/api/ihf/listings${search.size ? `?${search.toString()}` : ''}`;
   try {
-    const res = await fetch(path, { next: { revalidate: 300 } });
+    const controller = new AbortController();
+    const timeoutMs = Number(process.env.IHF_TIMEOUT_MS || 8000);
+    const t = setTimeout(() => controller.abort(), timeoutMs);
+    const res = await fetch(path, { next: { revalidate: 300 }, signal: controller.signal }).finally(() => clearTimeout(t));
     if (!res.ok) return [];
     const json: unknown = await res.json().catch(() => undefined);
     const itemsArray = (val: unknown): unknown[] | null => (Array.isArray(val) ? val : null);
@@ -136,7 +139,10 @@ export async function fetchIHFAgents(params?: Record<string, string | number>): 
   }
   const path = `/api/ihf/agents${search.size ? `?${search.toString()}` : ''}`;
   try {
-    const res = await fetch(path, { next: { revalidate: 3600 } });
+    const controller = new AbortController();
+    const timeoutMs = Number(process.env.IHF_TIMEOUT_MS || 8000);
+    const t = setTimeout(() => controller.abort(), timeoutMs);
+    const res = await fetch(path, { next: { revalidate: 3600 }, signal: controller.signal }).finally(() => clearTimeout(t));
     if (!res.ok) return [];
     const json: unknown = await res.json().catch(() => undefined);
     const itemsArray = (val: unknown): unknown[] | null => (Array.isArray(val) ? val : null);
