@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Section } from '@/components/ui/section';
 import { loadListings } from '@/lib/data';
-import { fetchLoftyListings } from '@/lib/lofty';
+import { fetchIHFListings } from '@/lib/ihf';
 
 export const metadata = { title: 'Listings | Cross Creek Realty' };
 export const revalidate = 300;
@@ -9,7 +9,7 @@ export const revalidate = 300;
 export default async function ListingsIndex({ searchParams }: { searchParams?: Promise<{ q?: string; mode?: string }> }) {
   const sp = (await searchParams) ?? {};
   const q = sp.q?.toLowerCase() ?? '';
-  let listings = await fetchLoftyListings({ limit: 30, status: 'active' });
+  let listings = await fetchIHFListings({ limit: 30, status: 'active' });
   if (!listings.length) {
     listings = await loadListings();
   }

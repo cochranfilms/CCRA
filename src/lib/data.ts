@@ -1,9 +1,14 @@
 import { Agent, Community, Listing } from '@/types/data';
+import { fetchIHFAgents } from '@/lib/ihf';
 import agentsJson from '../../content/agents.json';
 import communitiesJson from '../../content/communities.json';
 import listingsJson from '../../content/listings.json';
 
 export async function loadAgents(): Promise<Agent[]> {
+  try {
+    const agents = await fetchIHFAgents();
+    if (agents.length) return agents;
+  } catch {}
   return (agentsJson as unknown) as Agent[];
 }
 

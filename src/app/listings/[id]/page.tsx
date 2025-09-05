@@ -1,5 +1,5 @@
 import { loadListings } from '@/lib/data';
-import { fetchLoftyListings } from '@/lib/lofty';
+import { fetchIHFListings } from '@/lib/ihf';
 // Layout helpers not used on the redesigned listing page
 import ShareButtons from '@/components/ui/ShareButtons';
 import ShowingForm from '@/components/ui/ShowingForm';
@@ -11,13 +11,13 @@ interface Props { params: Promise<{ id: string }> }
 export const revalidate = 300;
 
 export async function generateStaticParams() {
-  const listings = (await fetchLoftyListings({ limit: 60 })) || (await loadListings());
+  const listings = (await fetchIHFListings({ limit: 60 })) || (await loadListings());
   return listings.map((l) => ({ id: l.id }));
 }
 
 export default async function ListingDetail({ params }: Props) {
   const { id } = await params;
-  let listings = await fetchLoftyListings({ limit: 60 });
+  let listings = await fetchIHFListings({ limit: 60 });
   if (!listings.length) {
     listings = await loadListings();
   }
