@@ -17,18 +17,20 @@ function getIHFConfig() {
   const siteParam = process.env.IHF_SITE_PARAM || 'siteId';
   const accountParam = process.env.IHF_ACCOUNT_PARAM || 'accountId';
   const debug = process.env.IHF_DEBUG === '1';
+  const forwardReferer = process.env.IHF_REFERER || '';
+  const forwardOrigin = process.env.IHF_ORIGIN || '';
   if (!apiKey) {
     throw new Error('Missing IHF_API_KEY (or IHOMEFINDER_API_KEY)');
   }
   if (!baseUrl) {
     throw new Error('Missing IHF_BASE_URL (or IHOMEFINDER_BASE_URL)');
   }
-  return { apiKey, baseUrl, listingsPath, authHeader, authPrefix, authIn, authQueryKey, siteId, accountId, headerSite, headerAccount, siteIn, accountIn, siteParam, accountParam, debug } as const;
+  return { apiKey, baseUrl, listingsPath, authHeader, authPrefix, authIn, authQueryKey, siteId, accountId, headerSite, headerAccount, siteIn, accountIn, siteParam, accountParam, debug, forwardReferer, forwardOrigin } as const;
 }
 
 export async function GET(req: NextRequest) {
   try {
-    const { apiKey, baseUrl, listingsPath, authHeader, authPrefix, authIn, authQueryKey, siteId, accountId, headerSite, headerAccount, siteIn, accountIn, siteParam, accountParam, debug } = getIHFConfig();
+    const { apiKey, baseUrl, listingsPath, authHeader, authPrefix, authIn, authQueryKey, siteId, accountId, headerSite, headerAccount, siteIn, accountIn, siteParam, accountParam, debug, forwardReferer, forwardOrigin } = getIHFConfig();
     const incomingUrl = new URL(req.url);
     const url = new URL(listingsPath, baseUrl);
     // forward all query params
@@ -37,6 +39,8 @@ export async function GET(req: NextRequest) {
     });
 
     const headers: Record<string, string> = { Accept: 'application/json' };
+    if (forwardReferer) headers['Referer'] = forwardReferer;
+    if (forwardOrigin) headers['Origin'] = forwardOrigin;
     if (authIn === 'header') {
       headers[authHeader] = authPrefix ? `${authPrefix} ${apiKey}` : apiKey;
     } else if (authIn === 'query') {
