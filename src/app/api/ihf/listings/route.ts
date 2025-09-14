@@ -53,6 +53,11 @@ export async function GET(req: NextRequest) {
       if (accountIn === 'header') headers[headerAccount] = accountId; else url.searchParams.set(accountParam, accountId);
     }
 
+    const sanitizedUrlForDiag = (() => {
+      const u = new URL(url.toString());
+      if (u.searchParams.has(authQueryKey)) u.searchParams.set(authQueryKey, '***');
+      return u.toString();
+    })();
     const controller = new AbortController();
     const timeoutMs = Number(process.env.IHF_TIMEOUT_MS || 8000);
     const t = setTimeout(() => controller.abort(), timeoutMs);
@@ -67,13 +72,33 @@ export async function GET(req: NextRequest) {
     if (!upstream.ok) {
       const payload = (process.env.NODE_ENV === 'production' && !debug)
         ? { error: 'Upstream error', status: upstream.status }
-        : { error: 'Upstream error', status: upstream.status, upstream: bodyText };
+        : { error: 'Upstream error', status: upstream.status, upstream: bodyText, url: sanitizedUrlForDiag };
       return NextResponse.json(payload, { status: upstream.status || 502 });
     }
     return new NextResponse(bodyText, { status: upstream.status, headers: { 'content-type': contentType } });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
-    return NextResponse.json({ error: message }, { status: 500 });
+    const debugEnabled = process.env.IHF_DEBUG === '1';
+    const diag = debugEnabled
+      ? {
+          baseUrl: process.env.IHF_BASE_URL || '',
+          listingsPath: process.env.IHF_LISTINGS_PATH || '/listings',
+          authIn: (process.env.IHF_AUTH_IN || 'header'),
+          authHeader: process.env.IHF_AUTH_HEADER || 'Authorization',
+          authPrefixSet: Boolean(process.env.IHF_AUTH_PREFIX),
+          authQueryKey: process.env.IHF_AUTH_QUERY_KEY || 'api_key',
+          siteIdSet: Boolean(process.env.IHF_SITE_ID),
+          siteIn: process.env.IHF_SITE_IN || 'header',
+          siteParam: process.env.IHF_SITE_PARAM || 'siteId',
+          accountIdSet: Boolean(process.env.IHF_ACCOUNT_ID),
+          accountIn: process.env.IHF_ACCOUNT_IN || 'header',
+          accountParam: process.env.IHF_ACCOUNT_PARAM || 'accountId',
+          refererSet: Boolean(process.env.IHF_REFERER),
+          originSet: Boolean(process.env.IHF_ORIGIN),
+          headerAuthUsed: (process.env.IHF_AUTH_IN || 'header') === 'header',
+        }
+      : undefined;
+    return NextResponse.json({ error: message, diag }, { status: 500 });
   }
 }
 

@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import { BLOG_POSTS } from '@/lib/data';
 import { getDailyCachedPosts } from '@/lib/blogAggregator';
 
 export const revalidate = 86400; // Rebuild this page at most once per day
@@ -11,13 +9,12 @@ export const metadata = {
 
 export default async function BlogPage() {
   const external = await getDailyCachedPosts(36);
-  const internal = BLOG_POSTS;
   return (
     <main>
       <section className="section bg-[var(--surface)]">
         <div className="container-wide">
           <h1 className="text-3xl md:text-4xl">Blog</h1>
-          <p className="mt-2 text-white/80 md:text-lg">Market insights, tips, and local stories.</p>
+          <p className="mt-2 text-white/80 md:text-lg">Daily curated market insights from trusted 2025 real estate sources.</p>
 
           <h2 className="mt-8 text-2xl font-semibold">Latest from around real estate</h2>
           <div className="mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -38,21 +35,7 @@ export default async function BlogPage() {
             ))}
           </div>
 
-          <h2 className="mt-12 text-2xl font-semibold">From Cross Creek Realty</h2>
-          <div className="mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {internal.map((post) => (
-              <article key={post.slug} className="card border border-[var(--muted)]/40 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={post.cover} alt="" className="w-full h-44 object-cover" />
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold line-clamp-2">{post.title}</h3>
-                  <p className="mt-2 text-sm text-white/80 line-clamp-3">{post.excerpt}</p>
-                  <div className="mt-3 text-xs text-white/60">By {post.author}</div>
-                  <Link href={`/blog/${post.slug}`} className="mt-4 inline-block btn-outline">Read more</Link>
-                </div>
-              </article>
-            ))}
-          </div>
+          {/* Removed internal section per request. Only external sources are shown. */}
         </div>
       </section>
     </main>

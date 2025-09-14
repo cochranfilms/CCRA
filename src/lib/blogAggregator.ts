@@ -191,6 +191,12 @@ export async function fetchAggregatedPosts(limit = 36): Promise<AggregatedPost[]
   const deduped = dedupeByUrl(flattened)
     // Keep only posts with useful media (image/video thumbnail available)
     .filter((p) => !!p.url && !!p.title && !!p.excerpt && !!p.cover)
+    // Only include posts from year 2025
+    .filter((p) => {
+      if (!p.date) return false;
+      const d = new Date(p.date);
+      return d.getFullYear() === 2025;
+    })
     .sort((a, b) => {
       const da = a.date ? new Date(a.date).getTime() : 0;
       const db = b.date ? new Date(b.date).getTime() : 0;

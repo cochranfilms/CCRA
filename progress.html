@@ -55,9 +55,35 @@
 
     <p class="lead">This one-page summary highlights the site design, key pages, lead/CRM plumbing, and the automated daily blog system. It’s written for a non‑technical reader while remaining specific for accountability.</p>
 
+    <h2>Latest Updates (This Week)</h2>
+    <div class="card">
+      <ul>
+        <li><strong>Latest Update — September 10, 2025</strong>
+          <ul>
+            <li>Started the template for the custom automated email.</li>
+            <li>Begun full copy and design for the Property Management page; this will link to Buildium for your property management users. First design pass is scheduled for tomorrow, and additional mockups will be added to the gallery below.</li>
+            <li>We are gathering the final pieces of information. There has been some back‑and‑forth with a few providers, but once everything is in hand, implementation will move very quickly—we won’t hold this up any longer than necessary.</li>
+          </ul>
+          <div class="note">Note: You’ll see a “Latest Updates” section inside this page’s code—this is where these notes are updated.</div>
+        </li>
+        <li><strong>Buyer/Seller Contact Form – Modernized</strong>: New branded layout with labeled inputs, required markers, and clear focus states. The single form now toggles Buyer/Seller with tailored fields.</li>
+        <li><strong>Email delivery wired via EmailJS</strong>: Form submits now trigger two emails using EmailJS Service <code>service_onh65w5</code>.
+          <ul>
+            <li>Buyer template: <code>template_nady0sm</code> • Seller template: <code>template_38ynpx7</code></li>
+            <li>Office notification + client confirmation are supported via the templates (both parties receive an email).</li>
+            <li>Public key reads from <code>NEXT_PUBLIC_EMAILJS_PUBLIC_KEY</code> with a safe fallback for development.</li>
+            <li>UTM parameters and page URL are included for attribution.</li>
+          </ul>
+        </li>
+        <li><strong>Navigation reliability</strong>: Fixed rare cases where decorative layers could block clicks on live preview.</li>
+        <li><strong>Hero media</strong>: Home and Communities pages now support full‑bleed background video (Home: <code>Interior_real_estate.mp4</code>, Communities: <code>realty.mp4</code>) with an accessibility‑friendly overlay.</li>
+        <li><strong>Section rhythm</strong>: Reduced excessive top/bottom padding on Buy and Communities heroes to improve above‑the‑fold fit.</li>
+      </ul>
+    </div>
+
     <h2>Client Note: Design Phase & Data Integration</h2>
     <div class="card">
-      <p>Mr. Clovie, these visuals are from our current design phase. We are actively wiring in your real listings, agent details, and community data now. If you have any changes or requests, please don’t hesitate to reach out.</p>
+      <p>Mr. Clovey, we’re in the final stages of gathering the remaining information. Once those last pieces arrive, we’ll be four‑fourths ahead and move swiftly to completion. In parallel, we’re crafting the copy and design for the Property Management experience—integrated with Buildium—so you can confidently sunset the separate property‑management developer and keep everything fluid within one seamless website.</p>
     </div>
 
     <h2>Design Mockups</h2>
@@ -133,6 +159,14 @@
         <strong>Adapters</strong>
         <p class="muted">A pluggable adapter pattern enables swapping the CRM later (HubSpot/Salesforce/Follow Up Boss). Development uses a safe console adapter.</p>
       </div>
+      <div class="card">
+        <strong>EmailJS Integration (Live)</strong>
+        <ul>
+          <li>Configured EmailJS with Public Key (env), Service <code>service_onh65w5</code>, and Buyer/Seller templates.</li>
+          <li>Both the brokerage and the client receive emails upon submission (notification + confirmation).</li>
+          <li>Graceful fallback if keys are missing so the UX is never blocked.</li>
+        </ul>
+      </div>
     </div>
 
     <h2>Automated Daily Blog (No Manual Work)</h2>
@@ -161,6 +195,17 @@
         <strong>Nearby API</strong>
         <p class="muted">Provides nearby places stubs with caching and graceful fallback.</p>
       </div>
+    </div>
+
+    <h2>Environment & Keys (In Progress)</h2>
+    <div class="card">
+      <p>We are gathering and validating provider keys. Production will read from environment variables and fallbacks are used only for development:</p>
+      <ul>
+        <li><strong>EmailJS</strong>: <code>NEXT_PUBLIC_EMAILJS_PUBLIC_KEY</code> (public key), Service <code>service_onh65w5</code>, Templates <code>template_nady0sm</code>/<code>template_38ynpx7</code>.</li>
+        <li><strong>Lofty</strong>: OAuth credentials for IDX/CRM endpoints (server‑side envs).</li>
+        <li><strong>Other providers</strong>: Map/analytics keys as needed, to be added to env and documented.</li>
+      </ul>
+      <div class="note">No secrets are committed to the repo. We’ll confirm final keys with you before launch.</div>
     </div>
 
     <h2>Content and Data</h2>

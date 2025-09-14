@@ -72,7 +72,26 @@ export async function GET(req: NextRequest) {
     return new NextResponse(bodyText, { status: upstream.status, headers: { 'content-type': contentType } });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
-    return NextResponse.json({ error: message }, { status: 500 });
+    const debugEnabled = process.env.IHF_DEBUG === '1';
+    const diag = debugEnabled
+      ? {
+          baseUrl: process.env.IHF_BASE_URL || '',
+          agentsPath: process.env.IHF_AGENTS_PATH || '/agents',
+          authIn: (process.env.IHF_AUTH_IN || 'header'),
+          authHeader: process.env.IHF_AUTH_HEADER || 'Authorization',
+          authPrefixSet: Boolean(process.env.IHF_AUTH_PREFIX),
+          authQueryKey: process.env.IHF_AUTH_QUERY_KEY || 'api_key',
+          siteIdSet: Boolean(process.env.IHF_SITE_ID),
+          siteIn: process.env.IHF_SITE_IN || 'header',
+          siteParam: process.env.IHF_SITE_PARAM || 'siteId',
+          accountIdSet: Boolean(process.env.IHF_ACCOUNT_ID),
+          accountIn: process.env.IHF_ACCOUNT_IN || 'header',
+          accountParam: process.env.IHF_ACCOUNT_PARAM || 'accountId',
+          refererSet: Boolean(process.env.IHF_REFERER),
+          originSet: Boolean(process.env.IHF_ORIGIN),
+        }
+      : undefined;
+    return NextResponse.json({ error: message, diag }, { status: 500 });
   }
 }
 

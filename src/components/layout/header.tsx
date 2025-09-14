@@ -65,7 +65,8 @@ export function Header() {
                 <img 
                   src="/logo.webp" 
                   alt="Cross Creek Realty" 
-                  className="h-12 w-auto transition-all duration-500 ease-out group-hover:scale-105" 
+                  className="h-12 w-auto max-w-none object-contain transition-all duration-500 ease-out group-hover:scale-105" 
+                  style={{ aspectRatio: 'auto' }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-orange-400/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>

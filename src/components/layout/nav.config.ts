@@ -23,6 +23,11 @@ export const NAV_ITEMS: NavItem[] = [
       { label: 'Calculator', href: '/calculator', description: 'Estimate payments and affordability.' },
     ],
   },
+  // Property Management
+  {
+    label: 'Property Management',
+    href: '/property-management',
+  },
   // Rent
   {
     label: 'Rent',
