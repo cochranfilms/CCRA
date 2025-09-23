@@ -1,4 +1,5 @@
 import { Section } from '@/components/ui/section';
+import Link from 'next/link';
 import { loadCommunities } from '@/lib/data';
 
 export const metadata = {
@@ -99,7 +100,7 @@ export default async function FeaturedAreasPage() {
             ))}
           </div>
           <div className="mt-8">
-            <a href="/listings" className="btn-primary">Search Homes by County</a>
+            <Link href="/listings" className="btn-primary">Search Homes by County</Link>
           </div>
         </div>
       </Section>

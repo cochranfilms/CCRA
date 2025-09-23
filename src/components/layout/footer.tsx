@@ -65,7 +65,7 @@ export function Footer() {
           <div className="font-semibold text-white/90">IDX/MLS Disclaimer</div>
           <p className="mt-2">
             Information is deemed reliable but not guaranteed. All listings are provided by IDX through participating
-            Brokers and the Multiple Listing Service and are for consumers' personal, non‑commercial use and may not be
+            Brokers and the Multiple Listing Service and are for consumers&apos; personal, non‑commercial use and may not be
             used for any purpose other than to identify prospective properties consumers may be interested in purchasing.
             Listing data is provided by iHomefinder/IDX and may be sourced, in whole or in part, from First Multiple
             Listing Service (FMLS) and Georgia MLS (GAMLS). Data is subject to change without notice and may not be
