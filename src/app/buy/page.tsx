@@ -6,7 +6,7 @@ export const metadata = { title: 'Buy | Cross Creek Realty' };
 export default function BuyPage() {
   return (
     <>
-      {/* Hero Section - Million Dollar Design */}
+      {/* Hero Section - updated to client copy */}
       <Section variant="dark" contained={false} className="relative overflow-hidden !py-0">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
         <div className="absolute inset-0 bg-[url('/featured-map.jpg')] bg-center bg-no-repeat md:bg-cover opacity-20"></div>
@@ -14,16 +14,16 @@ export default function BuyPage() {
           <div className="container-wide py-12 md:py-20">
             <div className="max-w-4xl">
               <div className="inline-block px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold tracking-wider mb-6">
-                PREMIUM HOME BUYING
+                BUY WITH CROSS CREEK
               </div>
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-                Find Your Dream Home
-                <span className="block text-4xl md:text-5xl font-light text-amber-400 mt-2">
-                  in Atlanta&apos;s Finest Neighborhoods
-                </span>
+                Where lifestyle meets location — your perfect Atlanta home awaits.
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl leading-relaxed">
-                Experience white-glove service with data-driven insights, exclusive access to off-market properties, and strategic negotiation that gets you the best possible deal.
+              <p className="text-xl md:text-2xl text-white/90 mb-6 max-w-3xl leading-relaxed">
+                Buying a home is more than a transaction — it’s a life milestone. At Cross Creek Realty Atlanta, we combine deep local knowledge with boutique-level service to make the process seamless, personal, and rewarding.
+              </p>
+              <p className="text-white/90 mb-10 max-w-3xl">
+                From Midtown lofts overlooking the skyline, to charming historic homes in Inman Park, to suburban retreats in Cobb and Gwinnett, our team connects you with properties that reflect your lifestyle and long-term goals. We go beyond search tools — we provide insider access, expert negotiations, tailored neighborhood guidance, and a seamless journey from first tour to final closing.
               </p>
               
               {/* Premium CTA Section */}
@@ -33,14 +33,18 @@ export default function BuyPage() {
                   className="relative px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg tracking-wide transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/30 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-amber-400 focus:ring-offset-4 group overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative z-10">EXPLORE LISTINGS</span>
+                  <span className="relative z-10">Start Your Home Search</span>
                 </Link>
                 <Link 
                   href="/#contact" 
                   className="relative px-8 py-4 border-2 border-white/30 text-white font-bold text-lg tracking-wide transition-all duration-300 hover:bg-white hover:text-slate-900 hover:border-white focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-4 group"
                 >
-                  <span className="relative z-10">FREE CONSULTATION</span>
+                  <span className="relative z-10">Free Consultation</span>
                 </Link>
+              </div>
+
+              <div className="text-white/80">
+                ✨ At Cross Creek, we don’t just help you buy a home. We help you discover where your life can thrive.
               </div>
 
               {/* Premium Stats */}
@@ -340,16 +344,12 @@ export default function BuyPage() {
         </div>
       </Section>
 
-      {/* Premium CTA Section */}
+      {/* Premium CTA Section - copy alignment */}
       <Section variant="dark" className="py-20">
         <div className="container-wide text-center">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Find Your Dream Home?
-            </h2>
-            <p className="text-xl text-white/80 mb-12 leading-relaxed">
-              Join hundreds of satisfied buyers who trusted Cross Creek Realty to guide them through one of life&apos;s most important decisions.
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to start your search?</h2>
+            <p className="text-xl text-white/80 mb-12 leading-relaxed">We&apos;ll guide you from the first tour to a confident closing.</p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link 

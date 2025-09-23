@@ -23,19 +23,14 @@ export const NAV_ITEMS: NavItem[] = [
       { label: 'Calculator', href: '/calculator', description: 'Estimate payments and affordability.' },
     ],
   },
-  // Property Management
-  {
-    label: 'Property Management',
-    href: '/property-management',
-  },
   // Rent
   {
     label: 'Rent',
     href: '/rent',
     children: [
       { label: 'Available Rentals', href: '/listings?mode=rent' },
-      { label: 'Application', href: '/resources' },
-      { label: 'Maintenance', href: '/resources' },
+      { label: 'Application', href: 'https://century21intown.managebuilding.com/Resident/rental-application/new' },
+      { label: 'Maintenance', href: 'https://century21intown.managebuilding.com/Resident/portal/login' },
     ],
   },
   // Sell
@@ -46,8 +41,13 @@ export const NAV_ITEMS: NavItem[] = [
       { label: 'Home Valuation', href: '/sell' },
       { label: 'Marketing Plan', href: '/resources' },
       { label: 'New Construction', href: '/listings?q=New%20Construction' },
-      { label: 'Talk to a Seller Advisor', href: '/?role=Seller#contact', description: 'Open the Seller contact form.' },
+      { label: 'Talk to a Seller Advisor', href: '/contact?role=Seller', description: 'Open the Seller contact form.' },
     ],
+  },
+  // Property Management (moved to appear after Sell)
+  {
+    label: 'Property Management',
+    href: '/property-management',
   },
   // Communities
   {
@@ -81,7 +81,7 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   // Contact CTA (scrolls to home contact section)
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Contact', href: '/contact' },
   // Blog
   { label: 'Blog', href: '/blog' },
 ];

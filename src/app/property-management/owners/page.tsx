@@ -20,40 +20,44 @@ export default function PMOwnersPage() {
           </div>
         </div>
       </Section>
-      <Section>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="card p-0 overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://images.unsplash.com/photo-1499914485622-a88fac536970?q=80&w=1600&auto=format&fit=crop"
-              alt="Owner reviewing financial statements"
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6">
-            <h2 className="text-2xl font-semibold mb-3">Benefits to Owners</h2>
-            <ul className="space-y-2">
-              <li>• Faster leasing with targeted marketing.</li>
-              <li>• Lower vacancy through proactive management.</li>
-              <li>• Fewer headaches with reliable tenant screening.</li>
-              <li>• Real-time financial visibility through our secure Owner Portal.</li>
-            </ul>
-            </div>
-          </div>
-          <div className="card p-0 overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://images.unsplash.com/photo-1560518883-4b4e6c5a3a2e?q=80&w=1600&auto=format&fit=crop"
-              alt="Portal and maintenance tracking"
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6">
-            <h2 className="text-2xl font-semibold mb-3">Owner Portal Features</h2>
-            <ul className="space-y-2">
-              <li>• Monthly financial statements</li>
-              <li>• Secure rent disbursements</li>
-              <li>• Maintenance request tracking</li>
-              <li>• Lease documents stored digitally</li>
-            </ul>
+      {/* Combined Owner Services + Portal Section */}
+      <Section variant="dark" contained={false} className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/60 to-slate-900/80" />
+        <div className="relative z-10">
+          <div className="container-wide py-12 md:py-16">
+            <h2 className="text-3xl md:text-4xl font-semibold">Owner Services & Portal</h2>
+            <p className="mt-3 text-white/90 md:text-lg max-w-3xl">Everything you need to manage performance and stay informed—streamlined and secure.</p>
+            <div className="mt-8 grid md:grid-cols-2 gap-8">
+              {/* Benefits card */}
+              <div className="bg-white text-slate-900 p-6 md:p-8 shadow-premium">
+                <h3 className="text-2xl font-semibold mb-3">Benefits to Owners</h3>
+                <ul className="space-y-2">
+                  <li>• Faster leasing with targeted marketing.</li>
+                  <li>• Lower vacancy through proactive management.</li>
+                  <li>• Fewer headaches with reliable tenant screening.</li>
+                  <li>• Real-time financial visibility through our secure Owner Portal.</li>
+                </ul>
+              </div>
+              {/* Features + CTA card */}
+              <div className="bg-white text-slate-900 p-6 md:p-8 shadow-premium">
+                <h3 className="text-2xl font-semibold mb-3">Owner Portal Features</h3>
+                <ul className="space-y-2">
+                  <li>• Monthly financial statements</li>
+                  <li>• Secure rent disbursements</li>
+                  <li>• Maintenance request tracking</li>
+                  <li>• Lease documents stored digitally</li>
+                </ul>
+                <div className="mt-6">
+                  <a
+                    href="https://signin.managebuilding.com/manager/public/authentication/login"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-gold"
+                  >
+                    Access Owner Portal
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

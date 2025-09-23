@@ -24,9 +24,34 @@ export default async function FindAgentPage({ searchParams }: { searchParams?: P
   ];
 
   return (
-    <Section>
-      <div className="container-wide">
-        <h1 className="text-3xl md:text-4xl font-semibold mb-6">Find an Agent</h1>
+    <>
+      {/* Hero with background video and title card (consistent with Agents/Join) */}
+      <section className="relative h-[44vh] md:h-[60vh] overflow-hidden">
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/realty.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-transparent" />
+        <div className="relative container-wide h-full flex items-center">
+          <div className="max-w-5xl text-white">
+            <div className="inline-block px-4 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-[color:var(--brand-deep)] text-xs font-semibold tracking-widest uppercase">Find Your Advisor</div>
+            <div className="mt-4 glass-effect-dark rounded-md p-6 md:p-8 shadow-premium">
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight">Find an <span className="text-amber-400">Agent</span></h1>
+              <p className="mt-3 md:text-lg text-white/85 max-w-3xl">Match with a local specialist for buying, selling, or investing across metro Atlanta.</p>
+              <div className="mt-4 h-1 w-28 bg-gradient-to-r from-amber-400 to-orange-500" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Section>
+        <div className="container-wide">
         <form className="flex gap-3 mb-6">
           <input className="card p-3 flex-1" name="q" placeholder="Search by name, area, specialty" defaultValue={q} />
           <button className="btn-primary" type="submit">Search</button>
@@ -60,7 +85,8 @@ export default async function FindAgentPage({ searchParams }: { searchParams?: P
         <div className="mt-8">
           <QuickLeadForm />
         </div>
-      </div>
-    </Section>
+        </div>
+      </Section>
+    </>
   );
 }

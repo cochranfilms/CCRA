@@ -13,13 +13,14 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) return notFound();
   return (
     <main>
-      <section className="section">
+      <section className="relative section overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-900/80 to-slate-900/40" />
         <div className="container-wide">
-          <h1 className="text-3xl md:text-4xl font-semibold">{post.title}</h1>
-          <div className="mt-2 text-sm text-white/70">By {post.author}</div>
+          <h1 className="text-3xl md:text-5xl font-bold text-white">{post.title}</h1>
+          <div className="mt-2 text-sm text-white/80">By {post.author}</div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={post.cover} alt="" className="mt-6 w-full max-h-[420px] object-cover" />
-          <article className="prose prose-invert mt-6 max-w-none">
+          <img src={post.cover} alt="" className="mt-6 w-full max-h-[480px] object-cover shadow-premium" />
+          <article className="prose prose-invert mt-8 max-w-none">
             <p>{post.content}</p>
             <p>
               This is placeholder content to visualize a full article. You can replace this with real

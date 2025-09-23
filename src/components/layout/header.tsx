@@ -43,6 +43,13 @@ export function Header() {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-400 to-cyan-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link 
+              href="/about" 
+              className="text-white/80 hover:text-white transition-all duration-300 text-sm font-medium tracking-wide relative group"
+            >
+              <span className="relative z-10">About</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-400 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link 
               href="/" 
               className="text-white/80 hover:text-white transition-all duration-300 text-sm font-medium tracking-wide relative group"
             >

@@ -28,16 +28,13 @@ export default async function CommunitiesPage() {
           <div className="container-wide py-12 md:py-20">
             <div className="max-w-4xl">
               <div className="inline-block px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold tracking-wider mb-6">
-                ATLANTA&apos;S FINEST COMMUNITIES
+                COMMUNITIES
               </div>
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-                Discover Your Perfect
-                <span className="block text-4xl md:text-5xl font-light text-amber-400 mt-2">
-                  Neighborhood
-                </span>
+                Explore the neighborhoods that define Atlanta
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl leading-relaxed">
-                From luxury high-rises in Buckhead to family-friendly communities in North Fulton, explore Atlanta&apos;s most desirable areas with insider knowledge and market expertise.
+                Atlanta is a city of stories, and every neighborhood offers a lifestyle of its own. Cross Creek Realty Atlanta helps you discover the one that fits you best.
               </p>
               
               {/* Premium CTA Section */}
@@ -47,13 +44,13 @@ export default async function CommunitiesPage() {
                   className="relative px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg tracking-wide transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/30 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-amber-400 focus:ring-offset-4 group overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative z-10">EXPLORE COMMUNITIES</span>
+                  <span className="relative z-10">Explore Neighborhoods</span>
                 </Link>
                 <Link 
                   href="/#contact" 
                   className="relative px-8 py-4 border-2 border-white/30 text-white font-bold text-lg tracking-wide transition-all duration-300 hover:bg-white hover:text-slate-900 hover:border-white focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-4 group"
                 >
-                  <span className="relative z-10">NEIGHBORHOOD GUIDE</span>
+                  <span className="relative z-10">Neighborhood Guide</span>
                 </Link>
               </div>
 
@@ -86,14 +83,17 @@ export default async function CommunitiesPage() {
         <div className="container-wide">
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-1 bg-slate-100 text-slate-600 text-sm font-semibold tracking-wider mb-4">
-              ATLANTA METRO
+              COMMUNITIES
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-              Where Lifestyle Meets Investment
-            </h2>
-            <p className="text-xl text-slate-600 max-w-4xl mx-auto">
-              Each community offers unique advantages - from top-rated schools and walkable amenities to luxury shopping and fine dining. Our comprehensive market analysis helps you find the perfect balance of lifestyle and investment potential.
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Explore the neighborhoods that define Atlanta</h2>
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto">Atlanta is a city of stories, and every neighborhood offers a lifestyle of its own. Cross Creek Realty Atlanta helps you discover the one that fits you best.</p>
+            <div className="mt-8 max-w-3xl mx-auto text-left">
+              <ul className="list-disc pl-6 space-y-2">
+                <li><strong>Buckhead</strong> – Atlanta’s premier luxury corridor, where fine dining, upscale shopping, and elegance meet.</li>
+                <li><strong>Alpharetta</strong> – A thriving tech hub with top schools, family energy, and community appeal.</li>
+                <li><strong>Midtown</strong> – The cultural heart of the city, home to art, innovation, and skyline living.</li>
+              </ul>
+            </div>
           </div>
 
           {/* Premium Feature Grid */}

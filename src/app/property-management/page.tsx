@@ -24,14 +24,13 @@ export default function PropertyManagementHomePage() {
                 PROPERTY MANAGEMENT IN METRO ATLANTA
               </div>
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-                Protecting Your Investment.
-                <span className="block text-4xl md:text-5xl font-light text-amber-400 mt-2">Maximizing Your Return. Simplifying Your Life.</span>
+                Protecting your investment. Elevating your returns. Simplifying ownership.
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl leading-relaxed">
-                Cross Creek Realty Atlanta is a full-service boutique brokerage specializing in residential, commercial, and property management. With over 40 years of combined experience, we’ve helped countless Atlanta property owners reduce stress, protect their assets, and maximize profitability.
+                Managing property doesn’t have to be complicated. With Cross Creek Realty Atlanta, you gain a partner who treats your investment like our own.
               </p>
               <p className="text-white/90 max-w-3xl mb-10">
-                Whether you own a single-family home, multi-unit property, or commercial space, our proven systems and dedicated team deliver peace of mind with measurable results.
+                Our services include tenant placement, maintenance, rent collection, compliance, and long-term strategies to protect and grow your portfolio. Whether you own one rental or a portfolio, our boutique service ensures your property is always cared for, always earning.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-10 md:mb-12">
                 <Link href="/property-management/contact" className="btn-primary">Call for Free Rental Analysis – (404) 355-2833</Link>
@@ -44,18 +43,53 @@ export default function PropertyManagementHomePage() {
 
       <Section>
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="card p-6">
-            <h3 className="text-xl font-semibold mb-2">Property Marketing</h3>
-            <p>Attract the right tenants fast.</p>
-          </div>
-          <div className="card p-6">
-            <h3 className="text-xl font-semibold mb-2">Tenant Screening</h3>
-            <p>Protect your investment with quality tenants.</p>
-          </div>
-          <div className="card p-6">
-            <h3 className="text-xl font-semibold mb-2">Owner Portal</h3>
-            <p>Real-time access to your property’s performance.</p>
-          </div>
+          {/* Property Marketing */}
+          <article className="relative overflow-hidden border border-white/10 bg-white transition-all duration-500 shadow-premium group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://images.unsplash.com/photo-1502673530728-f79b4cab31b1?q=80&w=1600&auto=format&fit=crop"
+              alt="Modern home interior used in real estate marketing"
+              className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-[1.03] transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-slate-900/5 to-transparent pointer-events-none" />
+            <div className="relative p-6 min-h-[220px] flex flex-col justify-end">
+              <h3 className="text-2xl font-semibold text-white">Property Marketing</h3>
+              <p className="mt-2 text-white/85">Attract the right tenants fast with premium visuals and wide syndication.</p>
+              <Link href="/property-management/services" className="mt-4 btn-outline-inverse w-max">Explore Marketing</Link>
+            </div>
+          </article>
+
+          {/* Tenant Screening */}
+          <article className="relative overflow-hidden border border-white/10 bg-white transition-all duration-500 shadow-premium group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=1600&auto=format&fit=crop"
+              alt="Handing over keys to new tenants"
+              className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-[1.03] transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-slate-900/5 to-transparent pointer-events-none" />
+            <div className="relative p-6 min-h-[220px] flex flex-col justify-end">
+              <h3 className="text-2xl font-semibold text-white">Tenant Screening</h3>
+              <p className="mt-2 text-white/85">Protect your investment with thorough screening and verified applicants.</p>
+              <Link href="/property-management/services" className="mt-4 btn-outline-inverse w-max">See Screening Process</Link>
+            </div>
+          </article>
+
+          {/* Owner Portal */}
+          <article className="relative overflow-hidden border border-white/10 bg-white transition-all duration-500 shadow-premium group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop"
+              alt="Owner portal analytics on laptop"
+              className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-[1.03] transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-slate-900/5 to-transparent pointer-events-none" />
+            <div className="relative p-6 min-h-[220px] flex flex-col justify-end">
+              <h3 className="text-2xl font-semibold text-white">Owner Portal</h3>
+              <p className="mt-2 text-white/85">Real-time performance dashboards, documents, and disbursements.</p>
+              <Link href="/property-management/owners" className="mt-4 btn-outline-inverse w-max">Owner Services</Link>
+            </div>
+          </article>
         </div>
       </Section>
 

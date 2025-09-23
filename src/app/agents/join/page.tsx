@@ -9,18 +9,32 @@ export default function JoinAgentPage() {
       {/* Full-bleed hero inspired by reference */}
       <section
         className="relative h-[60vh] md:h-[78vh] overflow-hidden"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1505691723518-36a5ac3b2a69?q=80&w=2000&auto=format&fit=crop')", backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/realty.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-transparent" />
         <div className="relative container-wide h-full flex items-center">
           <div className="max-w-5xl text-white">
-            <h1 className="text-4xl md:text-7xl font-semibold leading-tight">Why Do Top Agents Choose Cross Creek?</h1>
-            <div className="mt-6">
-              <a href="#join-video" className="inline-flex items-center gap-3 bg-white text-[color:var(--brand-deep)] px-5 py-3 text-base md:text-lg rounded-none shadow hover:bg-white/90">
-                <span>See the video</span>
-                <span aria-hidden>➜</span>
-              </a>
+            <div className="inline-block px-4 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-[color:var(--brand-deep)] text-xs font-semibold tracking-widest uppercase">
+              Career at Cross Creek
+            </div>
+            <div className="mt-4 glass-effect-dark rounded-md p-6 md:p-8 shadow-premium">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                Why Do Top Agents Choose <span className="text-amber-400">Cross Creek?</span>
+              </h1>
+              <p className="mt-3 md:text-lg text-white/85 max-w-3xl">
+                A platform built for high‑performers: premium marketing, qualified opportunities, and a
+                collaborative culture that helps you grow faster.
+              </p>
+              <div className="mt-4 h-1 w-28 bg-gradient-to-r from-amber-400 to-orange-500" />
             </div>
           </div>
         </div>

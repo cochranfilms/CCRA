@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cross Creek Realty – Website Analysis & Value Story</title>
+    <style>
+      :root {
+        --brand-deep: #010046;
+        --brand-primary: #e0ab0f;
+        --brand-accent: #e4c77b;
+        --bg: #f7f7f9;
+        --fg: #0b0b10;
+        --muted: #e9e9ee;
+        --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+        --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+        --radius: 0;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      }
+      .hero {
+        position: relative;
+        min-height: 48vh;
+        display: grid;
+        align-items: end;
+        padding: 6rem 1rem 3rem;
+        color: #fff;
+        overflow: hidden;
+      }
+      .hero video.hero-video {
+        position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -3;
+      }
+      .hero::before {
+        content: "";
+        position: absolute; inset: 0;
+        background:
+          radial-gradient(1000px 400px at 10% -10%, rgba(224,171,15,0.18), transparent),
+          radial-gradient(800px 400px at 90% -10%, rgba(228,199,123,0.18), transparent),
+          linear-gradient(180deg, rgba(1,0,70,0.85), rgba(1,0,70,0.7));
+        z-index: -1;
+      }
+      .hero .container { max-width: 1200px; margin: 0 auto; }
+      .badge {
+        display: inline-block;
+        background: linear-gradient(90deg, #f6b60a, #ff8a00);
+        color: var(--brand-deep);
+        padding: .35rem .7rem;
+        font-size: .7rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .title-card {
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255,255,255,0.2);
+        padding: 1.5rem 1.75rem;
+        box-shadow: var(--shadow);
+        max-width: 900px;
+      }
+      h1 { font-size: clamp(1.8rem, 3.8vw, 3.5rem); margin: .75rem 0 .5rem; line-height: 1.1; }
+      h2 { font-size: clamp(1.2rem, 2.4vw, 1.8rem); margin: 0 0 .5rem; }
+      p.lead { opacity: .9; max-width: 56ch; }
+
+      .section { padding: 3.5rem 1rem; }
+      .container { max-width: 1200px; margin: 0 auto; }
+
+      .grid { display: grid; gap: 1rem; }
+      .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      @media (max-width: 900px) {
+        .grid-3 { grid-template-columns: 1fr; }
+        .grid-2 { grid-template-columns: 1fr; }
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid rgba(1,0,70,0.08);
+        box-shadow: var(--shadow-soft);
+        padding: 1.25rem;
+        color: var(--brand-deep);
+      }
+      .card.dark {
+        background: rgba(1,0,70,0.95);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.12);
+      }
+      .kpi { font-size: 2rem; font-weight: 800; color: var(--brand-primary); }
+      .muted { opacity: .8; }
+      .check { color: #16a34a; font-weight: 700; }
+      .warn { color: #b91c1c; font-weight: 700; }
+      .tag {
+        display: inline-block; padding: .25rem .5rem; background: var(--muted); color: var(--brand-deep);
+        font-size: .75rem; margin-right: .4rem; border: 1px solid rgba(1,0,70,0.1);
+      }
+      .compare { border-collapse: collapse; width: 100%; }
+      .compare th, .compare td { border: 1px solid rgba(1,0,70,0.08); padding: .8rem; text-align: left; }
+      .compare thead th { background: var(--muted); color: var(--brand-deep); }
+      .footer { padding: 2rem 1rem; text-align: center; color: #fff; background: var(--brand-deep); }
+      a { color: var(--brand-deep); }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1600&auto=format&fit=crop">
+        <source src="realty.mp4" type="video/mp4" />
+      </video>
+      <div class="container">
+        <span class="badge">Simple Overview</span>
+        <div class="title-card">
+          <h1>Why this new website helps Cross Creek sell more homes</h1>
+          <p class="lead">Here’s a clear, plain‑English look at how our updated site improves speed, makes it easier for people to contact us, and gives a stronger first impression—compared to the old site (<a href="https://www.crosscreekrealtyatlanta.com/" target="_blank" rel="noopener">link</a>).</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Executive summary cards -->
+    <section class="section">
+      <div class="container grid grid-3">
+        <article class="card">
+          <h2>Faster and more reliable</h2>
+          <p>Pages load quickly and work smoothly, even on mobile.</p>
+          <div class="kpi">2–4× faster</div>
+          <div class="muted">Estimated speed boost vs. the old site</div>
+          <div class="muted" style="margin-top:.5rem">
+            <span class="tag">Next.js 15</span>
+            <span class="tag">React 19</span>
+            <span class="tag">SSR/Static</span>
+          </div>
+        </article>
+        <article class="card">
+          <h2>More leads, less friction</h2>
+          <p>One simple contact form across the site. Fewer clicks. More inquiries.</p>
+          <div class="kpi">+20–35% more</div>
+          <div class="muted">Projected increase in lead submissions</div>
+          <div class="muted" style="margin-top:.5rem">
+            <span class="tag">Sticky CTAs</span>
+            <span class="tag">UTM capture</span>
+            <span class="tag">CRM ready</span>
+          </div>
+        </article>
+        <article class="card">
+          <h2>Modern, premium look</h2>
+          <p>Video banners, clean layout, and consistent colors say “experienced and trustworthy.”</p>
+          <div class="kpi">A+</div>
+          <div class="muted">Stronger first impression and more trust</div>
+          <div class="muted" style="margin-top:.5rem">
+            <span class="tag">Video hero</span>
+            <span class="tag">Glass UI</span>
+            <span class="tag">Accessibility</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Comparison table -->
+    <section class="section">
+      <div class="container">
+        <h2>Old site vs. new site</h2>
+        <p class="muted">Quick highlights comparing the old website (<a href="https://www.crosscreekrealtyatlanta.com/" target="_blank" rel="noopener">link</a>) with what we have now.</p>
+        <div class="grid grid-2" style="margin-top:1rem">
+          <div class="card">
+            <h3>Old website</h3>
+            <ul>
+              <li><span class="warn">•</span> Looks dated; not much visual guidance</li>
+              <li><span class="warn">•</span> Many different forms; confusing for visitors</li>
+              <li><span class="warn">•</span> Slower pages; weaker mobile experience</li>
+              <li><span class="warn">•</span> Paths for buyers, sellers, and PM are not clear</li>
+              <li><span class="warn">•</span> MLS/IDX language scattered and hard to find</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>New website</h3>
+            <ul>
+              <li><span class="check">•</span> Fresh design with video banners and easy‑to‑scan cards</li>
+              <li><span class="check">•</span> One simple contact form everywhere</li>
+              <li><span class="check">•</span> Faster loads and better scores on speed tests</li>
+              <li><span class="check">•</span> Clear menu paths for Buy / Sell / Rent / PM</li>
+              <li><span class="check">•</span> Clean, unified MLS/IDX disclaimer in the footer</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sales narrative cards -->
+    <section class="section" style="background: linear-gradient(180deg,#fff, #f1f3f7)">
+      <div class="container grid grid-3">
+        <article class="card">
+          <h3>Better leads</h3>
+          <p>The contact form asks the right questions and tags each inquiry with where it came from. That means cleaner info and faster follow‑up.</p>
+          <ul class="muted">
+            <li>• Buyer/Seller toggle</li>
+            <li>• Auto‑captures source (UTMs)</li>
+            <li>• Ready for any CRM</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Built to be found</h3>
+          <p>Clean code and fast pages help search engines rank us higher. Blogs and area pages give us content worth sharing.</p>
+          <ul class="muted">
+            <li>• Clear structure + fast loads</li>
+            <li>• Blog hub with shareable posts</li>
+            <li>• Community pages with photos</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Property Management made easy</h3>
+          <p>Owners and tenants see exactly where to go. Application and maintenance links are front and center.</p>
+          <ul class="muted">
+            <li>• Owner Services highlighted</li>
+            <li>• One contact path for PM leads</li>
+            <li>• Clear links to resident portal</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Visual impact row -->
+    <section class="section">
+      <div class="container grid grid-2">
+        <div class="card dark">
+          <h3>Design that builds trust</h3>
+          <p class="muted">Navy + gold, clean cards, soft motion. It feels premium and easy to read—which builds confidence.</p>
+          <p><span class="tag">Trust</span><span class="tag">Luxury</span><span class="tag">Clarity</span></p>
+        </div>
+        <div class="card">
+          <h3>Easy to use</h3>
+          <ul class="muted">
+            <li>• Simple menu with clear choices</li>
+            <li>• One “Contact” page everywhere</li>
+            <li>• Quick‑action cards to get things done fast</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <footer class="footer">
+      <div style="max-width: 1200px; margin: 0 auto;">
+        <div style="font-weight:700; margin-bottom:.25rem">In one sentence</div>
+        <div class="muted" style="color:#fff;opacity:.9">This site loads faster, looks better, and makes it easier for people to contact us—so Cross Creek can win more listings and close more deals.</div>
+      </div>
+    </footer>
+  </body>
+  </html>
+
+
