@@ -26,18 +26,24 @@ export function middleware(req: NextRequest) {
 
   if (isMaintenance && !isExemptFromMaintenance) {
     const redirectUrl = new URL('/maintenance', req.url);
-    return NextResponse.redirect(redirectUrl, { status: 302 });
+    const res = NextResponse.redirect(redirectUrl, { status: 302 });
+    try { res.cookies.set('maintenance', '1', { path: '/', sameSite: 'lax' }); } catch {}
+    return res;
   }
 
   // Staging basic auth protection
   if (!isStagingRequest(req)) {
-    return NextResponse.next();
+    const res = NextResponse.next();
+    try { res.cookies.set('maintenance', isMaintenance ? '1' : '0', { path: '/', sameSite: 'lax' }); } catch {}
+    return res;
   }
 
   const username = process.env.STAGING_BASIC_AUTH_USER || '';
   const password = process.env.STAGING_BASIC_AUTH_PASS || '';
   if (!username || !password) {
-    return NextResponse.next();
+    const res = NextResponse.next();
+    try { res.cookies.set('maintenance', isMaintenance ? '1' : '0', { path: '/', sameSite: 'lax' }); } catch {}
+    return res;
   }
 
   const authHeader = req.headers.get('authorization') || '';
@@ -60,7 +66,9 @@ export function middleware(req: NextRequest) {
     return new NextResponse('Unauthorized', { status: 401, headers: { 'WWW-Authenticate': 'Basic realm="Staging"' } });
   }
 
-  return NextResponse.next();
+  const res = NextResponse.next();
+  try { res.cookies.set('maintenance', isMaintenance ? '1' : '0', { path: '/', sameSite: 'lax' }); } catch {}
+  return res;
 }
 
 export const config = {

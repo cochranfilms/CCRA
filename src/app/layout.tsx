@@ -30,7 +30,13 @@ const lato = Lato({
 });
 
 const isStaging = process.env.NEXT_PUBLIC_IS_STAGING === 'true' || process.env.VERCEL_ENV === 'preview';
-const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true' || process.env.MAINTENANCE_MODE === 'true';
+function isMaintenanceEnabled() {
+  if (typeof document !== 'undefined') {
+    const match = document.cookie.match(/(?:^|; )maintenance=(\d)/);
+    if (match) return match[1] === '1';
+  }
+  return process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true' || process.env.MAINTENANCE_MODE === 'true';
+}
 
 export const metadata: Metadata = {
   title: "Cross Creek Realty",
@@ -50,7 +56,7 @@ export default function RootLayout({
       <body className={`${playfair.variable} ${montserrat.variable} ${lato.variable} ${geistMono.variable} antialiased`}>
         <Header />
         <main>
-          {isMaintenance && <MaintenanceGuard enabled={true} />}
+          {isMaintenanceEnabled() && <MaintenanceGuard enabled={true} />}
           {children}
         </main>
         <Footer />
