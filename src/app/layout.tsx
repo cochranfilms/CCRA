@@ -29,6 +29,7 @@ const lato = Lato({
 });
 
 const isStaging = process.env.NEXT_PUBLIC_IS_STAGING === 'true' || process.env.VERCEL_ENV === 'preview';
+const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true' || process.env.MAINTENANCE_MODE === 'true';
 
 export const metadata: Metadata = {
   title: "Cross Creek Realty",
@@ -46,9 +47,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${playfair.variable} ${montserrat.variable} ${lato.variable} ${geistMono.variable} antialiased`}>
-        <Header />
+        {!isMaintenance && <Header />}
         <main>{children}</main>
-        <Footer />
+        {!isMaintenance && <Footer />}
       </body>
     </html>
   );
