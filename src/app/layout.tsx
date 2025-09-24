@@ -4,6 +4,8 @@ import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import MaintenanceGuard from "@/components/MaintenanceGuard";
+import MaintenancePage from "@/app/maintenance/page";
+import { cookies } from "next/headers";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -30,12 +32,13 @@ const lato = Lato({
 });
 
 const isStaging = process.env.NEXT_PUBLIC_IS_STAGING === 'true' || process.env.VERCEL_ENV === 'preview';
-function isMaintenanceEnabled() {
-  if (typeof document !== 'undefined') {
-    const match = document.cookie.match(/(?:^|; )maintenance=(\d)/);
-    if (match) return match[1] === '1';
-  }
-  return process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true' || process.env.MAINTENANCE_MODE === 'true';
+function isMaintenanceEnabledServer(): boolean {
+  try {
+    const c = cookies();
+    const cookieVal = c.get('maintenance')?.value;
+    if (cookieVal === '1') return true;
+  } catch {}
+  return process.env.MAINTENANCE_MODE === 'true' || process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
 }
 
 export const metadata: Metadata = {
@@ -56,8 +59,8 @@ export default function RootLayout({
       <body className={`${playfair.variable} ${montserrat.variable} ${lato.variable} ${geistMono.variable} antialiased`}>
         <Header />
         <main>
-          {isMaintenanceEnabled() && <MaintenanceGuard enabled={true} />}
-          {children}
+          {isMaintenanceEnabledServer() && <MaintenanceGuard enabled={true} />}
+          {isMaintenanceEnabledServer() ? <MaintenancePage /> : children}
         </main>
         <Footer />
       </body>
