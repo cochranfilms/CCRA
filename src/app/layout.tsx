@@ -3,6 +3,7 @@ import { Geist_Mono, Playfair_Display, Montserrat, Lato } from "next/font/google
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import MaintenanceGuard from "@/components/MaintenanceGuard";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -47,9 +48,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${playfair.variable} ${montserrat.variable} ${lato.variable} ${geistMono.variable} antialiased`}>
-        {!isMaintenance && <Header />}
-        <main>{children}</main>
-        {!isMaintenance && <Footer />}
+        <Header />
+        <main>
+          {isMaintenance && <MaintenanceGuard enabled={true} />}
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
