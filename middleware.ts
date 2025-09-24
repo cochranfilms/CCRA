@@ -8,6 +8,26 @@ function isStagingRequest(req: NextRequest): boolean {
 }
 
 export function middleware(req: NextRequest) {
+  const url = req.nextUrl;
+  const pathname = url.pathname || '/';
+
+  // Maintenance mode: when enabled via env, route all non-exempt paths to /maintenance
+  const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true' || process.env.MAINTENANCE_MODE === 'true';
+  const isExemptFromMaintenance =
+    pathname.startsWith('/maintenance') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/_next') ||
+    pathname === '/favicon.ico' ||
+    pathname === '/robots.txt' ||
+    pathname === '/sitemap.xml' ||
+    pathname === '/maintenance.html';
+
+  if (isMaintenance && !isExemptFromMaintenance) {
+    url.pathname = '/maintenance';
+    return NextResponse.rewrite(url);
+  }
+
+  // Staging basic auth protection
   if (!isStagingRequest(req)) {
     return NextResponse.next();
   }
