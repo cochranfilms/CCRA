@@ -23,8 +23,8 @@ export function middleware(req: NextRequest) {
     pathname === '/maintenance.html';
 
   if (isMaintenance && !isExemptFromMaintenance) {
-    url.pathname = '/maintenance';
-    return NextResponse.rewrite(url);
+    const redirectUrl = new URL('/maintenance', req.url);
+    return NextResponse.redirect(redirectUrl, { status: 302 });
   }
 
   // Staging basic auth protection
