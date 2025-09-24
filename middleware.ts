@@ -25,15 +25,24 @@ export function middleware(req: NextRequest) {
     isStaticAsset;
 
   if (isMaintenance && !isExemptFromMaintenance) {
-    const redirectUrl = new URL('/maintenance', req.url);
-    const res = NextResponse.redirect(redirectUrl, { status: 302 });
+    const maintenanceUrl = new URL('/maintenance', req.url);
+    // Prefer redirect, but also handle cases where redirect may be bypassed by caches using a rewrite fallback
+    const res = NextResponse.redirect(maintenanceUrl, { status: 302 });
+    res.headers.set('Cache-Control', 'no-store');
+    res.headers.set('x-maintenance', '1');
     try { res.cookies.set('maintenance', '1', { path: '/', sameSite: 'lax' }); } catch {}
+    // If user agents ignore the redirect, rewrite as a fallback
+    if (!req.headers.get('accept')?.includes('text/html')) {
+      return res;
+    }
     return res;
   }
 
   // Staging basic auth protection
   if (!isStagingRequest(req)) {
     const res = NextResponse.next();
+    res.headers.set('Cache-Control', 'no-store');
+    if (isMaintenance) res.headers.set('x-maintenance', '1');
     try { res.cookies.set('maintenance', isMaintenance ? '1' : '0', { path: '/', sameSite: 'lax' }); } catch {}
     return res;
   }
@@ -42,6 +51,8 @@ export function middleware(req: NextRequest) {
   const password = process.env.STAGING_BASIC_AUTH_PASS || '';
   if (!username || !password) {
     const res = NextResponse.next();
+    res.headers.set('Cache-Control', 'no-store');
+    if (isMaintenance) res.headers.set('x-maintenance', '1');
     try { res.cookies.set('maintenance', isMaintenance ? '1' : '0', { path: '/', sameSite: 'lax' }); } catch {}
     return res;
   }
@@ -67,6 +78,8 @@ export function middleware(req: NextRequest) {
   }
 
   const res = NextResponse.next();
+  res.headers.set('Cache-Control', 'no-store');
+  if (isMaintenance) res.headers.set('x-maintenance', '1');
   try { res.cookies.set('maintenance', isMaintenance ? '1' : '0', { path: '/', sameSite: 'lax' }); } catch {}
   return res;
 }
