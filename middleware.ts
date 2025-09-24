@@ -26,15 +26,18 @@ export function middleware(req: NextRequest) {
 
   if (isMaintenance && !isExemptFromMaintenance) {
     const maintenanceUrl = new URL('/maintenance', req.url);
-    // Prefer redirect, but also handle cases where redirect may be bypassed by caches using a rewrite fallback
+    const accept = req.headers.get('accept') || '';
+    if (accept.includes('text/html')) {
+      const rewrite = NextResponse.rewrite(maintenanceUrl);
+      rewrite.headers.set('Cache-Control', 'no-store');
+      rewrite.headers.set('x-maintenance', '1');
+      try { rewrite.cookies.set('maintenance', '1', { path: '/', sameSite: 'lax' }); } catch {}
+      return rewrite;
+    }
     const res = NextResponse.redirect(maintenanceUrl, { status: 302 });
     res.headers.set('Cache-Control', 'no-store');
     res.headers.set('x-maintenance', '1');
     try { res.cookies.set('maintenance', '1', { path: '/', sameSite: 'lax' }); } catch {}
-    // If user agents ignore the redirect, rewrite as a fallback
-    if (!req.headers.get('accept')?.includes('text/html')) {
-      return res;
-    }
     return res;
   }
 
