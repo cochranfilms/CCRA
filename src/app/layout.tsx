@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import MaintenanceGuard from "@/components/MaintenanceGuard";
 import MaintenancePage from "@/app/maintenance/page";
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -34,9 +34,8 @@ const lato = Lato({
 const isStaging = process.env.NEXT_PUBLIC_IS_STAGING === 'true' || process.env.VERCEL_ENV === 'preview';
 function isMaintenanceEnabledServer(): boolean {
   try {
-    const c = cookies();
-    const cookieVal = c.get('maintenance')?.value;
-    if (cookieVal === '1') return true;
+    const cookieHeader = headers().get('cookie') || '';
+    if (/\bmaintenance=1\b/.test(cookieHeader)) return true;
   } catch {}
   return process.env.MAINTENANCE_MODE === 'true' || process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
 }
