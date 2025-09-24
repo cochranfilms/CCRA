@@ -13,6 +13,7 @@ export function middleware(req: NextRequest) {
 
   // Maintenance mode: when enabled via env, route all non-exempt paths to /maintenance
   const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true' || process.env.MAINTENANCE_MODE === 'true';
+  const isStaticAsset = /\.(?:png|jpg|jpeg|webp|svg|gif|ico|mp4|webm|mov|m4v|mp3|wav|css|js|json|txt|xml|pdf|woff2?|ttf|eot)$/i.test(pathname);
   const isExemptFromMaintenance =
     pathname.startsWith('/maintenance') ||
     pathname.startsWith('/api') ||
@@ -20,7 +21,8 @@ export function middleware(req: NextRequest) {
     pathname === '/favicon.ico' ||
     pathname === '/robots.txt' ||
     pathname === '/sitemap.xml' ||
-    pathname === '/maintenance.html';
+    pathname === '/maintenance.html' ||
+    isStaticAsset;
 
   if (isMaintenance && !isExemptFromMaintenance) {
     const redirectUrl = new URL('/maintenance', req.url);
