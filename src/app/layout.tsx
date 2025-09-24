@@ -32,9 +32,10 @@ const lato = Lato({
 });
 
 const isStaging = process.env.NEXT_PUBLIC_IS_STAGING === 'true' || process.env.VERCEL_ENV === 'preview';
-function isMaintenanceEnabledServer(): boolean {
+async function isMaintenanceEnabledServer(): Promise<boolean> {
   try {
-    const cookieHeader = headers().get('cookie') || '';
+    const hdrs = await headers();
+    const cookieHeader = hdrs.get('cookie') || '';
     if (/\bmaintenance=1\b/.test(cookieHeader)) return true;
   } catch {}
   return process.env.MAINTENANCE_MODE === 'true' || process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
@@ -48,18 +49,19 @@ export const metadata: Metadata = {
     : { index: true, follow: true },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const maintenanceEnabled = await isMaintenanceEnabledServer();
   return (
     <html lang="en">
       <body className={`${playfair.variable} ${montserrat.variable} ${lato.variable} ${geistMono.variable} antialiased`}>
         <Header />
         <main>
-          {isMaintenanceEnabledServer() && <MaintenanceGuard enabled={true} />}
-          {isMaintenanceEnabledServer() ? <MaintenancePage /> : children}
+          {maintenanceEnabled && <MaintenanceGuard enabled={true} />}
+          {maintenanceEnabled ? <MaintenancePage /> : children}
         </main>
         <Footer />
       </body>
