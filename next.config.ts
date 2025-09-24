@@ -7,8 +7,8 @@ const nextConfig: NextConfig = {
     if (!isMaintenance) return [];
     return [
       {
-        // Exempt next assets, API, maintenance paths, and any file with an extension
-        source: '/((?!_next|maintenance|favicon.ico|robots.txt|sitemap.xml|api).*)(?<!\\.[a-zA-Z0-9]{2,4})',
+        // Exempt Next assets, API and maintenance path (asset exemptions handled in middleware)
+        source: '/((?!_next|maintenance|favicon.ico|robots.txt|sitemap.xml|api).*)',
         destination: '/maintenance',
         permanent: false,
       },
